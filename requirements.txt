@@ -2,20 +2,25 @@
 crewai>=1.15.0
 crewai-tools>=1.15.0
 
-# LLM and Environment
+# LLM & Environment
 python-dotenv>=1.0.1
 google-genai>=0.1.0
 
-# Backend API
+# Backend API & Server
 fastapi>=0.115.0
 uvicorn[standard]>=0.30.0
 pydantic>=2.9.0
+pydantic-settings>=2.5.0
 
-# Data Analysis & Safe Tools
+# Database Persistence
+sqlalchemy>=2.0.0
+
+# Data Analysis & Safe Search Tools
 pandas>=2.2.0
-duckduckgo-search>=7.0.0
+tabulate>=0.9.0
+ddgs>=9.16.0
 httpx>=0.28.0
 
-# Testing
+# Testing & Quality
 pytest>=8.0.0
 pytest-asyncio>=0.24.0
