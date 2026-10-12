@@ -2,9 +2,69 @@
   html, body {
     margin: 0;
     padding: 0;
-    background-color: #111319;
+    background-color: #07090e;
     color: #e2e2ea;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
   }
+}
+
+/* Background Atmosphere */
+.tech-grid-overlay {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.ambient-radial-glow {
+  background: 
+    radial-gradient(circle 900px at 50% -100px, rgba(56, 189, 248, 0.08), transparent 70%),
+    radial-gradient(circle 700px at 100% 60%, rgba(99, 102, 241, 0.05), transparent 60%),
+    radial-gradient(circle 600px at 0% 40%, rgba(6, 182, 212, 0.04), transparent 50%);
+}
+
+/* Glassmorphism Cards */
+.glass-panel {
+  background: rgba(13, 18, 31, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.glass-panel-interactive {
+  background: rgba(13, 18, 31, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-interactive:hover {
+  border-color: rgba(56, 189, 248, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -10px rgba(0, 240, 255, 0.1);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07090e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
 }
 
 /* Material Symbols alignment helper */
@@ -24,99 +84,113 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Markdown Rendering Styles for Obsidian Surface */
+/* Flow Connector Animation for Multi-Agent Execution */
+@keyframes flowDash {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.animate-flow-dash {
+  stroke-dasharray: 6 6;
+  animation: flowDash 1.2s linear infinite;
+}
+
+/* Custom Markdown Rendering Styles for Executive Strategy Deliverable */
 .markdown-body {
-  color: #c2c6d6;
+  color: #cbd5e1;
   font-size: 0.95rem;
-  line-height: 1.7;
+  line-height: 1.75;
+  font-family: 'Inter', sans-serif;
 }
 
 .markdown-body h1 {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #e2e2ea;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
+  color: #f8fafc;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding-bottom: 0.5rem;
+  letter-spacing: -0.02em;
 }
 
 .markdown-body h2 {
   font-size: 1.35rem;
   font-weight: 600;
-  color: #adc6ff;
-  margin-top: 1.25rem;
-  margin-bottom: 0.5rem;
+  color: #38bdf8;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
 }
 
 .markdown-body h3 {
   font-size: 1.15rem;
   font-weight: 600;
-  color: #e2e2ea;
-  margin-top: 1rem;
+  color: #f1f5f9;
+  margin-top: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
 .markdown-body h4 {
   font-size: 1rem;
   font-weight: 600;
-  color: #4cd7f6;
-  margin-top: 0.75rem;
+  color: #818cf8;
+  margin-top: 1rem;
   margin-bottom: 0.25rem;
 }
 
 .markdown-body p {
-  margin-bottom: 1rem;
+  margin-bottom: 1.15rem;
 }
 
 .markdown-body ul {
   list-style-type: disc;
   padding-left: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.15rem;
 }
 
 .markdown-body li {
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
 }
 
 .markdown-body blockquote {
-  border-left: 3px solid #4d8eff;
-  background: rgba(77, 142, 255, 0.06);
-  padding: 0.75rem 1rem;
+  border-left: 3px solid #38bdf8;
+  background: rgba(56, 189, 248, 0.05);
+  padding: 0.85rem 1.15rem;
   border-radius: 0 0.5rem 0.5rem 0;
-  margin: 1rem 0;
-  color: #adc6ff;
+  margin: 1.25rem 0;
+  color: #7dd3fc;
   font-style: italic;
 }
 
 .markdown-body table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.25rem 0;
-  background: #141C2E;
+  margin: 1.5rem 0;
+  background: rgba(13, 18, 31, 0.8);
   border-radius: 0.75rem;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .markdown-body th {
-  background: #1d2025;
-  color: #adc6ff;
+  background: #131d31;
+  color: #38bdf8;
   font-weight: 600;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .markdown-body td {
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   font-size: 0.875rem;
-  color: #c2c6d6;
+  color: #cbd5e1;
 }
 
 .markdown-body tr:hover td {
@@ -134,5 +208,19 @@
   border-radius: 0.25rem;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85em;
-  color: #4cd7f6;
+  color: #38bdf8;
+}
+
+/* Print styling */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  aside, header, button {
+    display: none !important;
+  }
+  .markdown-body {
+    color: #111111 !important;
+  }
 }
