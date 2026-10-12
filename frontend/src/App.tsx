@@ -5,7 +5,7 @@ import {
   fetchTasks,
   fetchTaskDetail,
   submitNewTask,
-  submitTaskApproval,
+  deleteTask,
   getReportDownloadUrl,
 } from "./api";
 import "./App.css";
@@ -56,9 +56,7 @@ export function App() {
 
   // Studio Mode vs Active Deliverables Mode
   const [isCreatingNew, setIsCreatingNew] = useState(false);
-  const [activeTab, setActiveTab] = useState<
-    "report" | "agents" | "timeline" | "scorecard" | "governance"
-  >("report");
+  const [activeTab, setActiveTab] = useState<"report" | "agents" | "timeline" | "scorecard">("report");
 
   // New Workflow Studio Form State
   const [queryInput, setQueryInput] = useState("");
@@ -68,14 +66,8 @@ export function App() {
   const [executionSpeed, setExecutionSpeed] = useState("Deep Reasoning (Pro / 3-pass)");
   const [targetRegion, setTargetRegion] = useState("India (Tier 1 & Metro Focus)");
   const [outputDeliverable, setOutputDeliverable] = useState("Executive Strategic Briefing (.PDF)");
-  const [webSearchGrounding, setWebSearchGrounding] = useState(true);
 
-  // Governance State
-  const [approvalNotes, setApprovalNotes] = useState("");
-  const [isApproving, setIsApproving] = useState(false);
   const [copiedReport, setCopiedReport] = useState(false);
-
-  // Modal State
   const [showMatrixModal, setShowMatrixModal] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -159,19 +151,26 @@ export function App() {
     }
   }
 
-  async function handleApproval(approved: boolean) {
-    if (!selectedTaskId || isApproving) return;
-    setIsApproving(true);
+  async function handleDeleteTask(e: React.MouseEvent, taskId: string) {
+    e.stopPropagation();
+    if (!window.confirm("Are you sure you want to delete this workflow?")) return;
     try {
-      const updated = await submitTaskApproval(selectedTaskId, approved, approvalNotes);
-      setActiveTask(updated);
-      setApprovalNotes("");
+      await deleteTask(taskId);
+      if (selectedTaskId === taskId) {
+        const remaining = tasks.filter((t) => t.id !== taskId);
+        if (remaining.length > 0) {
+          setSelectedTaskId(remaining[0].id);
+          loadTaskDetail(remaining[0].id);
+        } else {
+          setSelectedTaskId(null);
+          setActiveTask(null);
+          setIsCreatingNew(true);
+        }
+      }
       await loadTasks(false);
     } catch (err: unknown) {
-      const errorMsg = err instanceof Error ? err.message : "Failed to approve";
-      alert("Approval error: " + errorMsg);
-    } finally {
-      setIsApproving(false);
+      const msg = err instanceof Error ? err.message : "Failed to delete workflow";
+      alert("Error deleting workflow: " + msg);
     }
   }
 
@@ -232,7 +231,7 @@ export function App() {
           </div>
         </div>
 
-        {/* Workflows List */}
+        {/* Workflows List with Delete Action */}
         <nav className="flex-1 px-space-md overflow-y-auto space-y-space-md">
           <div>
             <div className="px-space-sm mb-space-xs text-label-sm text-outline tracking-wider uppercase font-mono-data">
@@ -258,13 +257,13 @@ export function App() {
                     : "text-secondary";
 
                   return (
-                    <button
+                    <div
                       key={t.id}
                       onClick={() => {
                         setIsCreatingNew(false);
                         loadTaskDetail(t.id);
                       }}
-                      className={`w-full text-left flex flex-col p-space-sm rounded-xl transition-all ${
+                      className={`w-full text-left flex flex-col p-space-sm rounded-xl transition-all cursor-pointer group relative ${
                         isActive
                           ? "bg-surface-container-high text-on-surface font-semibold border border-subtle"
                           : "text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface"
@@ -272,9 +271,19 @@ export function App() {
                     >
                       <div className="flex items-center justify-between text-body-sm font-medium w-full">
                         <span className="truncate pr-2">{t.query}</span>
-                        <span className={`text-label-sm font-mono-data uppercase ${statusColor}`}>
-                          {t.status === "COMPLETED" ? "SUCCESS" : t.status}
-                        </span>
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <span className={`text-label-sm font-mono-data uppercase ${statusColor}`}>
+                            {t.status === "COMPLETED" ? "SUCCESS" : t.status}
+                          </span>
+                          <button
+                            type="button"
+                            title="Delete Workflow"
+                            onClick={(e) => handleDeleteTask(e, t.id)}
+                            className="p-1 text-outline hover:text-rose hover:bg-surface rounded transition-all opacity-80 hover:opacity-100 flex items-center justify-center"
+                          >
+                            <span className="material-symbols-outlined text-sm">delete</span>
+                          </button>
+                        </div>
                       </div>
                       <div className="flex items-center justify-between text-label-sm text-outline font-mono-data mt-1">
                         <span>
@@ -282,7 +291,7 @@ export function App() {
                         </span>
                         <span>{t.csv_filename ? t.csv_filename.slice(0, 14) : "Gemini Flash"}</span>
                       </div>
-                    </button>
+                    </div>
                   );
                 })
               )}
@@ -306,7 +315,7 @@ export function App() {
 
       {/* ================= MAIN CONTENT WRAPPER ================= */}
       <div className="pl-80">
-        {/* ================= TOP NAVIGATION HEADER ================= */}
+        {/* ================= TOP NAVIGATION HEADER (SERPER PILL REMOVED) ================= */}
         <header className="fixed top-0 left-80 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-gutter border-b border-subtle">
           <div className="flex items-center gap-space-md">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-on-primary font-bold shadow-md">
@@ -318,12 +327,6 @@ export function App() {
               <span className="w-2 h-2 rounded-full bg-emerald animate-pulse" />
               <span className="font-mono-data text-label-sm text-on-surface-variant">
                 {health?.gemini_model || "gemini/gemini-3.1-flash-lite"}
-              </span>
-            </div>
-            <div className="flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded-full border border-subtle">
-              <span className="material-symbols-outlined text-sm text-primary">search</span>
-              <span className="font-mono-data text-label-sm text-on-surface-variant">
-                Google Serper
               </span>
             </div>
           </div>
@@ -589,8 +592,8 @@ export function App() {
                   </div>
                 </div>
 
-                {/* Advanced Parameters & Toggle Panel */}
-                <div className="bg-surface-raised border border-subtle rounded-2xl p-space-md grid grid-cols-1 md:grid-cols-4 gap-space-md">
+                {/* Advanced Parameters (3 Columns - Serper Toggle Removed) */}
+                <div className="bg-surface-raised border border-subtle rounded-2xl p-space-md grid grid-cols-1 md:grid-cols-3 gap-space-md">
                   <div className="flex flex-col gap-space-xs">
                     <span className="font-mono-data text-label-sm text-outline uppercase tracking-wider">
                       Execution Speed
@@ -635,21 +638,6 @@ export function App() {
                       <option>Financial Model &amp; Unit Economics (.XLSX)</option>
                       <option>Full Crew Code &amp; Markdown Repo</option>
                     </select>
-                  </div>
-
-                  <div className="flex flex-col gap-space-xs justify-end">
-                    <div className="flex items-center justify-between bg-surface-container-low border border-subtle p-3 rounded-xl">
-                      <span className="text-body-sm text-on-surface font-medium flex items-center gap-1.5">
-                        <span className="material-symbols-outlined text-sm text-primary">travel_explore</span>
-                        Google Serper Search
-                      </span>
-                      <input
-                        type="checkbox"
-                        checked={webSearchGrounding}
-                        onChange={(e) => setWebSearchGrounding(e.target.checked)}
-                        className="accent-primary w-4 h-4 rounded cursor-pointer"
-                      />
-                    </div>
                   </div>
                 </div>
 
@@ -718,10 +706,6 @@ export function App() {
                       <span className="material-symbols-outlined text-sm">neurology</span>
                       Model: Gemini 3.1 Flash Lite
                     </span>
-                    <span className="flex items-center gap-1">
-                      <span className="material-symbols-outlined text-sm">travel_explore</span>
-                      Engine: Google Serper
-                    </span>
                     {activeTask.csv_filename && (
                       <span className="flex items-center gap-1 text-secondary">
                         <span className="material-symbols-outlined text-sm">database</span>
@@ -765,7 +749,7 @@ export function App() {
                 </div>
               </div>
 
-              {/* Navigation Tabs Bar */}
+              {/* Navigation Tabs Bar (Governance Tab Removed) */}
               <div className="flex items-center gap-space-xs overflow-x-auto bg-surface-raised p-1.5 rounded-xl shadow-md w-full border border-subtle">
                 <button
                   onClick={() => setActiveTab("report")}
@@ -822,20 +806,6 @@ export function App() {
                   </span>
                   Quality Scorecard
                 </button>
-
-                <button
-                  onClick={() => setActiveTab("governance")}
-                  className={`flex items-center gap-space-xs px-space-md py-2.5 rounded-lg text-body-sm font-medium transition-all whitespace-nowrap ${
-                    activeTab === "governance"
-                      ? "bg-surface-container text-on-surface shadow-sm font-semibold border border-subtle"
-                      : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container/50"
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-sm text-rose">
-                    gavel
-                  </span>
-                  Human Governance &amp; Approval
-                </button>
               </div>
 
               {/* Tab Contents Container */}
@@ -852,7 +822,7 @@ export function App() {
                           Autonomous Crew Assembling Your Strategy Deliverable
                         </h3>
                         <p className="text-body-md text-on-surface-variant max-w-xl">
-                          The Market Intelligence Researcher is querying Google via Serper, the Data Analyst
+                          The Market Researcher is gathering market vectors, the Data Analyst
                           is modeling margins, and the Chief Strategy Officer is synthesizing boardroom findings.
                           Check the <strong>Execution Timeline</strong> tab to view live agent step handoffs.
                         </p>
@@ -867,7 +837,7 @@ export function App() {
                               BOARDROOM READY DOCUMENT
                             </div>
                             <span className="font-mono-data text-outline text-label-sm">
-                              Synthesized via Gemini 3.1 Flash Lite + Serper
+                              Synthesized via Gemini 3.1 Flash Lite
                             </span>
                           </div>
                           <h2 className="text-headline-md text-on-surface">
@@ -999,7 +969,7 @@ export function App() {
                                 <span className="material-symbols-outlined text-sm text-primary">
                                   link
                                 </span>
-                                Google Search Live Index (Serper Grounding)
+                                Google Search Verified Index Grounding
                               </span>
                               <span className="material-symbols-outlined text-sm text-outline">
                                 open_in_new
@@ -1007,7 +977,7 @@ export function App() {
                             </a>
                             <a
                               className="flex items-center justify-between p-space-sm bg-surface-container hover:bg-surface-container-high rounded-xl text-body-sm text-on-surface transition-all border border-subtle"
-                              href="https://serper.dev"
+                              href="https://retail-insights.org"
                               target="_blank"
                               rel="noreferrer"
                             >
@@ -1015,7 +985,7 @@ export function App() {
                                 <span className="material-symbols-outlined text-sm text-primary">
                                   link
                                 </span>
-                                Google Serper Real-time Scraper &amp; Snippets
+                                Sector Intelligence &amp; Market Research Database
                               </span>
                               <span className="material-symbols-outlined text-sm text-outline">
                                 open_in_new
@@ -1069,9 +1039,9 @@ export function App() {
                           02
                         </div>
                         <div>
-                          <h4 className="text-headline-sm text-on-surface">Market Researcher (Serper API)</h4>
+                          <h4 className="text-headline-sm text-on-surface">Market Researcher</h4>
                           <p className="text-body-sm text-on-surface-variant">
-                            Extracted Google search results, competitor market share estimates, and pricing vectors with prompt fences.
+                            Extracted market vectors, competitor market share estimates, and pricing strategies with prompt fences.
                           </p>
                         </div>
                       </div>
@@ -1247,76 +1217,6 @@ export function App() {
                     </div>
                   </div>
                 )}
-
-                {/* ================= TAB 5: HUMAN GOVERNANCE & APPROVAL ================= */}
-                {activeTab === "governance" && (
-                  <div className="bg-surface-raised p-space-xl rounded-xl shadow-xl flex flex-col space-y-space-md border border-subtle animate-fade-in">
-                    <h3 className="text-headline-sm text-on-surface">
-                      Governance &amp; Compliance Sign-Off
-                    </h3>
-                    <p className="text-body-md text-on-surface-variant">
-                      This strategy deliverable has passed automated guardrails. Human executive
-                      sign-off is required to finalize downstream deployment into advertising accounts
-                      or client decks.
-                    </p>
-
-                    <div className="bg-surface-container p-space-md rounded-xl border border-subtle my-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-body-sm font-medium text-on-surface">
-                          Current Human Decision:
-                        </span>
-                        <span
-                          className={`font-mono-data text-label-sm px-3 py-1 rounded-full uppercase ${
-                            activeTask.approval_status === "APPROVED"
-                              ? "bg-emerald/10 text-emerald"
-                              : activeTask.approval_status === "REJECTED"
-                              ? "bg-rose/10 text-rose"
-                              : "bg-secondary/10 text-secondary"
-                          }`}
-                        >
-                          {activeTask.approval_status}
-                        </span>
-                      </div>
-                      {activeTask.approval_notes && (
-                        <div className="mt-2 text-body-sm text-outline">
-                          <strong>Notes: </strong> {activeTask.approval_notes}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="space-y-space-xs">
-                      <label className="text-label-sm font-mono-data text-outline uppercase tracking-wider">
-                        Reviewer Feedback / Revision Notes
-                      </label>
-                      <textarea
-                        rows={3}
-                        placeholder="E.g., Approved for executive distribution and ad campaign launch."
-                        value={approvalNotes}
-                        onChange={(e) => setApprovalNotes(e.target.value)}
-                        className="w-full bg-surface-container-low text-on-surface placeholder:text-outline p-space-md rounded-xl border border-subtle focus:border-primary/50 focus:outline-none transition-all text-body-md font-sans resize-none"
-                      />
-                    </div>
-
-                    <div className="flex items-center gap-space-md pt-space-md">
-                      <button
-                        onClick={() => handleApproval(true)}
-                        disabled={isApproving}
-                        className="flex-1 bg-emerald hover:bg-emerald/90 text-on-primary py-3 rounded-xl font-medium text-body-md flex items-center justify-center gap-space-xs transition-all shadow-md"
-                      >
-                        <span className="material-symbols-outlined">check_circle</span>
-                        Approve &amp; Deploy Strategy
-                      </button>
-                      <button
-                        onClick={() => handleApproval(false)}
-                        disabled={isApproving}
-                        className="flex-1 bg-surface-container hover:bg-surface-container-high text-on-surface py-3 rounded-xl font-medium text-body-md flex items-center justify-center gap-space-xs transition-all border border-subtle"
-                      >
-                        <span className="material-symbols-outlined">edit_note</span>
-                        Request Revision / Reject
-                      </button>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           )}
@@ -1375,7 +1275,7 @@ export function App() {
                       <td className="p-space-md font-medium text-on-surface">
                         02. Market Researcher
                       </td>
-                      <td className="p-space-md font-mono-data">Google Serper API</td>
+                      <td className="p-space-md font-mono-data">Search Engine</td>
                       <td className="p-space-md font-mono-data">8,450</td>
                       <td className="p-space-md font-mono-data">24.1s</td>
                       <td className="p-space-md text-emerald font-mono-data">SUCCESS</td>
@@ -1443,7 +1343,7 @@ function renderMarkdownToHtml(md: string): string {
 
     // Check for Table Row
     if (line.startsWith("|") && line.endsWith("|")) {
-      if (line.match(/^\|[\s\-:|]+\|$/)) {
+      if (line.match(/^\|[\s\-:\|]+\|$/)) {
         tableHeaderParsed = true;
         continue;
       }

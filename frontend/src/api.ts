@@ -54,3 +54,11 @@ export async function submitTaskApproval(taskId: string, approved: boolean, note
 export function getReportDownloadUrl(taskId: string): string {
   return `${API_BASE}/api/tasks/${taskId}/report`;
 }
+
+export async function deleteTask(taskId: string): Promise<void> {
+  const res = await fetch(`${API_BASE}/api/tasks/${taskId}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("Failed to delete task");
+}
+

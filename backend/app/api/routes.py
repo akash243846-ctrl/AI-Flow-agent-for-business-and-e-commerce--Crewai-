@@ -142,3 +142,14 @@ def download_project_zip():
         media_type="application/zip",
         filename="agentflow-ai.zip"
     )
+
+@router.delete("/api/tasks/{task_id}", tags=["Tasks"])
+def delete_task_endpoint(task_id: str, db: Session = Depends(get_db)):
+    """Deletes a workflow task and its associated events."""
+    record = db.query(TaskRecord).filter(TaskRecord.id == task_id).first()
+    if not record:
+        raise HTTPException(status_code=404, detail="Task not found.")
+    db.delete(record)
+    db.commit()
+    return {"status": "deleted", "id": task_id}
+
