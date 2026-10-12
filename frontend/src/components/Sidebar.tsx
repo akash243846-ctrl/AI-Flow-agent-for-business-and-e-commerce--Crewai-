@@ -89,7 +89,7 @@ export function Sidebar({
             onStartNew();
             onCloseMobile();
           }}
-          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-medium text-sm py-2.5 px-4 rounded-xl shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35 transition-all duration-200 group active:scale-[0.98]"
+          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-fixed font-semibold text-sm py-2.5 px-4 rounded-xl shadow-lg shadow-primary-container/20 hover:shadow-primary-container/35 hover:opacity-95 transition-all duration-200 group active:scale-[0.98]"
         >
           <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
           <span>Launch New Workflow</span>

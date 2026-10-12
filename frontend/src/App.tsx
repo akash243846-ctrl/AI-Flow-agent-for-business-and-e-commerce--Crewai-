@@ -15,6 +15,7 @@ import { AgentPipeline } from "./components/AgentPipeline";
 import { ReportView } from "./components/ReportView";
 import { TimelineView } from "./components/TimelineView";
 import { ScorecardView } from "./components/ScorecardView";
+import { GrowthStudioView } from "./components/GrowthStudioView";
 import { AgentMatrixModal } from "./components/AgentMatrixModal";
 import { Toast, type ToastMessage } from "./components/Toast";
 import { 
@@ -25,7 +26,8 @@ import {
   Plus, 
   Sparkles,
   Share2,
-  PanelLeftOpen
+  PanelLeftOpen,
+  TrendingUp
 } from "lucide-react";
 import "./App.css";
 
@@ -37,7 +39,7 @@ export function App() {
   const [health, setHealth] = useState<SystemHealth | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isCreatingNew, setIsCreatingNew] = useState(false);
-  const [activeTab, setActiveTab] = useState<"studio" | "report" | "pipeline" | "timeline" | "scorecard">("report");
+  const [activeTab, setActiveTab] = useState<"studio" | "report" | "pipeline" | "growth" | "timeline" | "scorecard">("report");
   const [isMatrixOpen, setIsMatrixOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
@@ -369,6 +371,19 @@ export function App() {
 
                   <button
                     type="button"
+                    onClick={() => setActiveTab("growth")}
+                    className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all shrink-0 ${
+                      activeTab === "growth"
+                        ? "bg-secondary-container/20 text-secondary border border-secondary/40 shadow-sm"
+                        : "text-on-surface-variant hover:text-on-surface hover:bg-white/[0.04]"
+                    }`}
+                  >
+                    <TrendingUp className="w-3.5 h-3.5 text-secondary" />
+                    <span>Unit Economics Studio</span>
+                  </button>
+
+                  <button
+                    type="button"
                     onClick={() => setActiveTab("scorecard")}
                     className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all shrink-0 ${
                       activeTab === "scorecard"
@@ -396,7 +411,7 @@ export function App() {
                   <button
                     type="button"
                     onClick={handleStartNew}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white shadow-md shadow-cyan-500/20 transition-all"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-fixed hover:opacity-95 shadow-md shadow-primary-container/20 font-semibold transition-all"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>New Workflow</span>
@@ -430,6 +445,18 @@ export function App() {
                     />
                   )}
 
+                  {activeTab === "growth" && (
+                    <GrowthStudioView
+                      onApplyToStudio={(snippet) => {
+                        setQueryInput(snippet);
+                        setIsCreatingNew(true);
+                        setActiveTab("studio");
+                        triggerToast("Unit economics applied to Workflow Studio", "success");
+                      }}
+                      onToast={triggerToast}
+                    />
+                  )}
+
                   {activeTab === "scorecard" && (
                     <ScorecardView task={activeTask} />
                   )}
@@ -444,7 +471,7 @@ export function App() {
                   <button
                     type="button"
                     onClick={handleStartNew}
-                    className="px-5 py-2.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-lg shadow-cyan-500/20 hover:scale-105 transition-all inline-flex items-center gap-2"
+                    className="px-5 py-2.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-fixed shadow-lg shadow-primary-container/20 hover:scale-105 font-semibold transition-all inline-flex items-center gap-2"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Launch New Workflow</span>

@@ -351,8 +351,8 @@ export function StudioWorkspace({
             disabled={isSubmitting || !queryInput.trim()}
             className={`w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl font-semibold text-sm transition-all duration-200 shadow-xl ${
               isSubmitting || !queryInput.trim()
-                ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-white/[0.05]'
-                : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.01] active:scale-[0.99]'
+                ? 'bg-surface-container-high text-outline cursor-not-allowed border border-white/[0.05]'
+                : 'bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-fixed hover:opacity-95 shadow-[0_0_20px_rgba(0,240,255,0.25)] hover:shadow-[0_0_28px_rgba(0,240,255,0.4)] hover:scale-[1.01] active:scale-[0.99]'
             }`}
           >
             {isSubmitting ? (
