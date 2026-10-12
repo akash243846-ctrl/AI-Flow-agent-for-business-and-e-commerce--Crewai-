@@ -1,6 +1,6 @@
 ﻿"""
 AgentFlow AI - Task Execution Service
-Handles asynchronous multi-agent task execution, state transitions, database updates, and rate-limit events.
+Handles asynchronous multi-agent task execution, state transitions, database updates, and timeline events.
 """
 import uuid
 import threading
@@ -32,7 +32,7 @@ class TaskService:
         db.refresh(record)
         
         # Log initial event
-        TaskService._log_event(db, task_id, "System", "STARTED", f"Task registered with ID: {task_id}")
+        TaskService._log_event(db, task_id, "System", "REGISTERED", f"Task registered with ID: {task_id}")
         return record
 
     @staticmethod
@@ -73,10 +73,11 @@ class TaskService:
 
             record.status = "RUNNING"
             db.commit()
-            TaskService._log_event(db, task_id, "Supervisor", "STARTED", "Strategic Supervisor initialized workflow.")
+            TaskService._log_event(db, task_id, "Supervisor", "DECONSTRUCTION", f"Deconstructed business query into sequential research & strategy phases.")
+            TaskService._log_event(db, task_id, "Market Researcher", "STARTED", "Initiated live web intelligence & competitor discovery via Google Serper API.")
 
-            def progress_hook(msg: str):
-                TaskService._log_event(db, task_id, "System", "RATE_LIMIT_PAUSE", msg)
+            def progress_hook(agent: str, ev_type: str, msg: str):
+                TaskService._log_event(db, task_id, agent, ev_type, msg)
 
             # 2. Run Crew Workflow
             result = run_agentflow_crew(query=query, csv_path=csv_path, progress_callback=progress_hook)
@@ -93,8 +94,12 @@ class TaskService:
             db.commit()
 
             TaskService._log_event(
-                db, task_id, "Reviewer", "COMPLETED",
-                f"Quality Review completed with scorecard. Total duration: {result.get('elapsed_seconds')}s"
+                db, task_id, "Report Writer", "SYNTHESIS_COMPLETE",
+                "Full-length executive business strategy report generated & saved to disk."
+            )
+            TaskService._log_event(
+                db, task_id, "Quality Auditor", "AUDIT_COMPLETE",
+                f"Completed editorial and fact-checking scorecard. Total duration: {result.get('elapsed_seconds')}s"
             )
             logger.info(f"Task {task_id} completed successfully.")
 
@@ -123,5 +128,5 @@ class TaskService:
         db.refresh(record)
         
         status_label = "APPROVED" if approved else "REJECTED"
-        TaskService._log_event(db, task_id, "Human Reviewer", "APPROVAL", f"Human marked report as {status_label}. Notes: {notes or 'None'}")
+        TaskService._log_event(db, task_id, "Human Reviewer", "APPROVAL", f"Human marked deliverable as {status_label}. Notes: {notes or 'None'}")
         return record

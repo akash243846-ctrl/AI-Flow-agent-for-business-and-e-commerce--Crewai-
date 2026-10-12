@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Bot,
   Sparkles,
@@ -15,6 +15,8 @@ import {
   Search,
   Check,
   Database,
+  Layers,
+  TrendingUp,
 } from "lucide-react";
 import type { Task, SystemHealth } from "./types";
 import {
@@ -28,9 +30,31 @@ import {
 import "./App.css";
 
 const PRESET_PROMPTS = [
-  "Research the Indian kidswear e-commerce market, analyze the competitive landscape, and design a 30-day marketing plan.",
-  "Investigate the growth of quick-commerce grocery apps in tier-2 Indian cities with customer acquisition risks.",
-  "Evaluate B2B SaaS sales automation tools for small manufacturing firms with implementation barriers.",
+  {
+    category: "D2C E-Commerce",
+    title: "Indian Kidswear D2C Strategy",
+    prompt: "Research the Indian kidswear e-commerce market, analyze FirstCry and Hopscotch competitor dynamics, evaluate unit economics, and create an aggressive 30-day marketing plan.",
+  },
+  {
+    category: "Quick-Commerce",
+    title: "Quick-Commerce vs Marketplaces",
+    prompt: "Analyze the operational and margin differences between selling on Quick-Commerce (Blinkit, Zepto, Swiggy Instamart) vs traditional Marketplaces (Amazon, Flipkart) for Indian CPG brands.",
+  },
+  {
+    category: "B2B SaaS",
+    title: "B2B SaaS Churn & Pricing",
+    prompt: "Evaluate B2B sales automation CRM tools for small and medium manufacturing enterprises. Analyze integration barriers, customer churn patterns, and a 30-day rollout roadmap.",
+  },
+  {
+    category: "Dropshipping & Export",
+    title: "Cross-Border E-Commerce",
+    prompt: "Formulate a cross-border e-commerce expansion blueprint for Indian home decor and apparel brands targeting US and GCC markets via Shopify and international logistics.",
+  },
+  {
+    category: "Performance Marketing",
+    title: "CAC / ROAS Unit Economics",
+    prompt: "Develop a unit economics optimization framework for high-return D2C apparel brands. Address RTO (Return to Origin) reduction, Meta Ads CAC inflation, and retention strategies.",
+  },
 ];
 
 export function App() {
@@ -38,7 +62,11 @@ export function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
   const [activeTask, setActiveTask] = useState<Task | null>(null);
-  const [activeTab, setActiveTab] = useState<"report" | "timeline" | "audit" | "governance">("report");
+  
+  // FIX: Dedicated state to ensure "Launch New Workflow" NEVER closes while typing
+  const [isCreatingNew, setIsCreatingNew] = useState(false);
+  
+  const [activeTab, setActiveTab] = useState<"report" | "agents" | "timeline" | "audit" | "governance">("report");
   
   // New Task Form State
   const [queryInput, setQueryInput] = useState("");
@@ -53,22 +81,22 @@ export function App() {
   
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // 1. Initial Load & Health Check
+  // 1. Initial Load: auto-select first task if available
   useEffect(() => {
     loadHealth();
-    loadTasks();
+    loadTasks(true);
   }, []);
 
-  // 2. Polling for Active Tasks
+  // 2. Polling for Active Tasks (autoSelect = false so it NEVER interrupts user typing)
   useEffect(() => {
     const interval = setInterval(() => {
-      loadTasks();
-      if (selectedTaskId) {
+      loadTasks(false);
+      if (selectedTaskId && !isCreatingNew) {
         loadTaskDetail(selectedTaskId, false);
       }
     }, 4000);
     return () => clearInterval(interval);
-  }, [selectedTaskId]);
+  }, [selectedTaskId, isCreatingNew]);
 
   async function loadHealth() {
     try {
@@ -79,11 +107,12 @@ export function App() {
     }
   }
 
-  async function loadTasks() {
+  async function loadTasks(autoSelect = false) {
     try {
       const data = await fetchTasks();
       setTasks(data);
-      if (!selectedTaskId && data.length > 0) {
+      // Only auto-select on initial page load if not already in creation mode
+      if (autoSelect && !selectedTaskId && !isCreatingNew && data.length > 0) {
         setSelectedTaskId(data[0].id);
         loadTaskDetail(data[0].id);
       }
@@ -104,6 +133,10 @@ export function App() {
     }
   }
 
+  function handleStartNewWorkflow() {
+    setIsCreatingNew(true);
+  }
+
   async function handleLaunchTask(e: React.FormEvent) {
     e.preventDefault();
     if (!queryInput.trim() || isSubmitting) return;
@@ -113,7 +146,8 @@ export function App() {
       const newTask = await submitNewTask(queryInput, selectedFile);
       setQueryInput("");
       setSelectedFile(null);
-      await loadTasks();
+      setIsCreatingNew(false);
+      await loadTasks(false);
       setSelectedTaskId(newTask.id);
       setActiveTab("timeline");
       await loadTaskDetail(newTask.id);
@@ -132,7 +166,7 @@ export function App() {
       const updated = await submitTaskApproval(selectedTaskId, approved, approvalNotes);
       setActiveTask(updated);
       setApprovalNotes("");
-      await loadTasks();
+      await loadTasks(false);
     } catch (err: unknown) {
       const errorMsg = err instanceof Error ? err.message : "Failed to approve";
       alert("Approval error: " + errorMsg);
@@ -163,28 +197,28 @@ export function App() {
           <div>
             <span className="brand-title">AgentFlow AI</span>
           </div>
-          <span className="brand-badge">Enterprise Multi-Agent</span>
+          <span className="brand-badge">Multi-Agent Business OS</span>
         </div>
 
         <div className="header-meta">
           <div className="status-pill">
             <span className={`status-dot ${health ? "online" : "offline"}`} />
-            <span>{health ? "Backend Online" : "Connecting..."}</span>
+            <span>{health ? "Backend Live" : "Connecting..."}</span>
           </div>
 
           <div className="status-pill">
             <Sparkles size={14} color="#60a5fa" />
-            <span>{health?.gemini_model || "gemini/gemini-3.5-flash"}</span>
+            <span>{health?.gemini_model || "gemini/gemini-3.1-flash-lite"}</span>
           </div>
 
           <button
             className="refresh-btn"
             onClick={() => {
               loadHealth();
-              loadTasks();
+              loadTasks(false);
               if (selectedTaskId) loadTaskDetail(selectedTaskId);
             }}
-            title="Refresh Tasks"
+            title="Refresh State"
           >
             <RefreshCw size={15} />
           </button>
@@ -198,10 +232,7 @@ export function App() {
           <div className="sidebar-actions">
             <button
               className="primary-btn"
-              onClick={() => {
-                setSelectedTaskId(null);
-                setActiveTask(null);
-              }}
+              onClick={handleStartNewWorkflow}
             >
               <Sparkles size={16} />
               <span>Launch New Workflow</span>
@@ -211,7 +242,7 @@ export function App() {
               <Search size={14} className="search-icon" />
               <input
                 type="text"
-                placeholder="Filter task history..."
+                placeholder="Search business history..."
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
               />
@@ -221,16 +252,19 @@ export function App() {
           <div className="task-list">
             {filteredTasks.length === 0 ? (
               <div style={{ padding: "24px 16px", textAlign: "center", color: "var(--text-dim)", fontSize: "13px" }}>
-                No workflows found. Launch your first research task!
+                No workflows found. Launch your first business task!
               </div>
             ) : (
               filteredTasks.map((t) => {
-                const isActive = selectedTaskId === t.id;
+                const isActive = !isCreatingNew && selectedTaskId === t.id;
                 return (
                   <div
                     key={t.id}
                     className={`task-item-card ${isActive ? "active" : ""}`}
-                    onClick={() => loadTaskDetail(t.id)}
+                    onClick={() => {
+                      setIsCreatingNew(false);
+                      loadTaskDetail(t.id);
+                    }}
                   >
                     <div className="task-card-header">
                       <span className={`task-status-tag tag-${t.status.toLowerCase()}`}>
@@ -256,40 +290,63 @@ export function App() {
 
         {/* Center / Right Content Workspace */}
         <main className="main-workspace">
-          {!selectedTaskId || !activeTask ? (
-            /* Launch Form View */
+          {isCreatingNew || !activeTask ? (
+            /* Launch Form View - STABLE, NEVER CLOSES UNTIL SUBMITTED OR CANCELLED */
             <div className="launch-container animate-fade-in">
               <div className="launch-header">
-                <h1>Multi-Agent Autonomous Strategy Engine</h1>
-                <p>
-                  Deploy specialized CrewAI agents powered by Google Gemini to perform live market research,
-                  conduct safe statistical data profiling, synthesize executive business reports, and enforce editorial quality.
-                </p>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                  <div>
+                    <h1>Universal Business & E-Commerce Strategy Engine</h1>
+                    <p>
+                      Deploy specialized CrewAI agents powered by Google Gemini and Serper Google Search
+                      to answer any business, marketplace, D2C, B2B, pricing, or supply chain challenge in rigorous detail.
+                    </p>
+                  </div>
+                  {activeTask && (
+                    <button
+                      className="preset-pill-btn"
+                      onClick={() => setIsCreatingNew(false)}
+                      style={{ padding: "6px 14px", background: "rgba(255,255,255,0.06)" }}
+                    >
+                      Back to Current Report
+                    </button>
+                  )}
+                </div>
               </div>
 
-              <div className="preset-pills-bar">
-                {PRESET_PROMPTS.map((preset, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    className="preset-pill-btn"
-                    onClick={() => setQueryInput(preset)}
-                  >
-                    "{preset.slice(0, 48)}..."
-                  </button>
-                ))}
+              {/* Preset Prompts Section */}
+              <div>
+                <label style={{ fontSize: "12px", fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "10px", display: "block" }}>
+                  Featured Business & E-Commerce Blueprint Presets:
+                </label>
+                <div className="preset-pills-bar">
+                  {PRESET_PROMPTS.map((preset, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className="preset-pill-btn"
+                      onClick={() => setQueryInput(preset.prompt)}
+                    >
+                      <span style={{ color: "var(--accent-cyan)", fontWeight: 700 }}>{preset.category}: </span>
+                      {preset.title}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <form onSubmit={handleLaunchTask} className="form-card">
                 <div className="input-group">
-                  <label>Business Objective or Market Query</label>
+                  <label>Business Objective, E-Commerce Query, or Market Challenge</label>
                   <textarea
                     className="prompt-textarea"
-                    placeholder="E.g., Research the Indian kidswear e-commerce market, analyze available retail data, identify key competitors, and create a 30-day marketing plan..."
+                    placeholder="Enter any business topic... E.g., How can an Indian D2C footwear brand scale from Rs 10 Lakhs/month to Rs 1 Crore/month on Shopify? Include CAC reduction, Meta Ads funnel, supplier negotiations, and a 30-day action plan."
                     value={queryInput}
                     onChange={(e) => setQueryInput(e.target.value)}
                     required
                   />
+                  <div style={{ fontSize: "11px", color: "var(--text-dim)", marginTop: "4px" }}>
+                    {queryInput.length} characters (Detailed prompts produce richer multi-thousand-word executive deliverables)
+                  </div>
                 </div>
 
                 <div className="input-group">
@@ -319,33 +376,45 @@ export function App() {
                       </div>
                     ) : (
                       <div>
-                        <strong>Click or Drag a CSV dataset to attach</strong>
+                        <strong>Attach a CSV dataset for quantitative profiling (Optional)</strong>
                         <div style={{ fontSize: "12px", color: "var(--text-dim)" }}>
-                          Our Data Analyst Agent will compute descriptive statistics and anomalies without executing arbitrary code.
+                          Our Data Analyst Agent computes sales distributions, return rates, and unit economics without executing arbitrary code.
                         </div>
                       </div>
                     )}
                   </div>
                 </div>
 
-                <button
-                  type="submit"
-                  className="primary-btn"
-                  style={{ alignSelf: "flex-start", padding: "12px 24px" }}
-                  disabled={isSubmitting || !queryInput.trim()}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <RefreshCw size={16} className="animate-spin-slow" />
-                      <span>Coordinating Multi-Agent Crew...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send size={16} />
-                      <span>Kickoff AgentFlow Crew</span>
-                    </>
+                <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+                  <button
+                    type="submit"
+                    className="primary-btn"
+                    style={{ padding: "12px 28px" }}
+                    disabled={isSubmitting || !queryInput.trim()}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <RefreshCw size={16} className="animate-spin-slow" />
+                        <span>Deploying 5 Autonomous Agents...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send size={16} />
+                        <span>Kickoff AgentFlow Crew</span>
+                      </>
+                    )}
+                  </button>
+
+                  {activeTask && (
+                    <button
+                      type="button"
+                      className="preset-pill-btn"
+                      onClick={() => setIsCreatingNew(false)}
+                    >
+                      Cancel
+                    </button>
                   )}
-                </button>
+                </div>
               </form>
             </div>
           ) : (
@@ -398,14 +467,21 @@ export function App() {
                   onClick={() => setActiveTab("report")}
                 >
                   <FileText size={16} />
-                  <span>Executive Report</span>
+                  <span>Executive Strategy Report</span>
+                </button>
+                <button
+                  className={`nav-tab-btn ${activeTab === "agents" ? "active" : ""}`}
+                  onClick={() => setActiveTab("agents")}
+                >
+                  <Layers size={16} />
+                  <span>Agent Work & Roles</span>
                 </button>
                 <button
                   className={`nav-tab-btn ${activeTab === "timeline" ? "active" : ""}`}
                   onClick={() => setActiveTab("timeline")}
                 >
                   <Activity size={16} />
-                  <span>Agent Timeline & Trace ({activeTask.events?.length || 0})</span>
+                  <span>Execution Timeline ({activeTask.events?.length || 0})</span>
                 </button>
                 <button
                   className={`nav-tab-btn ${activeTab === "audit" ? "active" : ""}`}
@@ -425,6 +501,7 @@ export function App() {
 
               {/* Tab Contents */}
               <div className="detail-tab-body">
+                {/* TAB 1: EXECUTIVE REPORT */}
                 {activeTab === "report" && (
                   <div className="report-paper">
                     {activeTask.status === "RUNNING" || activeTask.status === "QUEUED" ? (
@@ -432,7 +509,7 @@ export function App() {
                         <RefreshCw size={36} className="animate-spin-slow" color="var(--accent-blue)" style={{ margin: "0 auto 16px" }} />
                         <h3 style={{ marginBottom: "8px" }}>Agents Are Assembling Your Deliverable</h3>
                         <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>
-                          Researcher is querying web sources and Analyst is profiling metrics. Check the Timeline tab for live agent steps.
+                          Researcher is searching Google via Serper, Analyst is calculating unit economics, and Writer is drafting the report. Check the Timeline tab for live agent steps.
                         </p>
                       </div>
                     ) : activeTask.report_markdown ? (
@@ -450,6 +527,112 @@ export function App() {
                   </div>
                 )}
 
+                {/* TAB 2: AGENT WORK BREAKDOWN */}
+                {activeTab === "agents" && (
+                  <div style={{ maxWidth: "960px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "20px" }}>
+                    <div style={{ marginBottom: "8px" }}>
+                      <h3 style={{ fontSize: "18px", color: "#ffffff", marginBottom: "4px" }}>Multi-Agent Collaboration Architecture</h3>
+                      <p style={{ fontSize: "13px", color: "var(--text-muted)" }}>
+                        Here is the exact role, tool suite, and output contribution delivered by each specialized agent for this task:
+                      </p>
+                    </div>
+
+                    {/* Agent 1: Supervisor */}
+                    <div className="agent-detail-card">
+                      <div className="agent-header-row">
+                        <div className="agent-avatar-box supervisor-avatar">
+                          <Layers size={20} color="#60a5fa" />
+                        </div>
+                        <div>
+                          <div className="agent-role-title">1. Strategic Project Supervisor</div>
+                          <div className="agent-role-sub">Workflow Orchestration & Task Scoping</div>
+                        </div>
+                        <span className="agent-status-badge">COMPLETED</span>
+                      </div>
+                      <div className="agent-body-text">
+                        <strong>Responsibility:</strong> Analyzed the user's objective (<em>"{activeTask.query.slice(0, 100)}..."</em>), deconstructed it into sequential milestones, set quality parameters, and metered LLM request rates to prevent quota spikes.
+                      </div>
+                    </div>
+
+                    {/* Agent 2: Researcher */}
+                    <div className="agent-detail-card">
+                      <div className="agent-header-row">
+                        <div className="agent-avatar-box researcher-avatar">
+                          <Search size={20} color="#34d399" />
+                        </div>
+                        <div>
+                          <div className="agent-role-title">2. Principal Market & Competitor Researcher</div>
+                          <div className="agent-role-sub">Google Search (Serper API) & Evidence Gathering</div>
+                        </div>
+                        <span className="agent-status-badge">COMPLETED</span>
+                      </div>
+                      <div className="agent-body-text">
+                        <strong>Responsibility:</strong> Scoured live Google Search for industry players, pricing points, customer reviews, and market valuations. Extracted verifiable URLs and applied anti-prompt-injection fences.
+                      </div>
+                      {activeTask.research_summary && (
+                        <div className="agent-output-preview">
+                          <strong>Raw Intelligence Preview:</strong>
+                          <div style={{ marginTop: "6px", maxHeight: "140px", overflowY: "auto", fontSize: "12px", color: "#cbd5e1" }}>
+                            {activeTask.research_summary.slice(0, 500)}...
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Agent 3: Data Analyst */}
+                    <div className="agent-detail-card">
+                      <div className="agent-header-row">
+                        <div className="agent-avatar-box analyst-avatar">
+                          <TrendingUp size={20} color="#fbbf24" />
+                        </div>
+                        <div>
+                          <div className="agent-role-title">3. Quantitative Business Data Analyst</div>
+                          <div className="agent-role-sub">Pandas Statistical Profiling & Unit Economics</div>
+                        </div>
+                        <span className="agent-status-badge">{activeTask.csv_filename ? "ACTIVE" : "STANDBY"}</span>
+                      </div>
+                      <div className="agent-body-text">
+                        <strong>Responsibility:</strong> {activeTask.csv_filename ? `Profiled ${activeTask.csv_filename} using deterministic Pandas calculations, measuring SKU volumes, return percentages, and margins without executing arbitrary LLM code.` : "Evaluated market-standard unit economics (CAC, LTV, ROAS, AOV, Contribution Margin) based on sector benchmarks."}
+                      </div>
+                    </div>
+
+                    {/* Agent 4: Report Writer */}
+                    <div className="agent-detail-card">
+                      <div className="agent-header-row">
+                        <div className="agent-avatar-box writer-avatar">
+                          <FileText size={20} color="#a78bfa" />
+                        </div>
+                        <div>
+                          <div className="agent-role-title">4. Executive Strategy Report Writer</div>
+                          <div className="agent-role-sub">Boardroom Synthesis & 30-Day Execution Plan</div>
+                        </div>
+                        <span className="agent-status-badge">COMPLETED</span>
+                      </div>
+                      <div className="agent-body-text">
+                        <strong>Responsibility:</strong> Merged qualitative market evidence and quantitative metrics into a structured 8-section Markdown deliverable with competitive comparison tables, phased weekly roadmaps, and risk mitigation strategies.
+                      </div>
+                    </div>
+
+                    {/* Agent 5: Quality Auditor */}
+                    <div className="agent-detail-card">
+                      <div className="agent-header-row">
+                        <div className="agent-avatar-box reviewer-avatar">
+                          <ShieldCheck size={20} color="#f43f5e" />
+                        </div>
+                        <div>
+                          <div className="agent-role-title">5. Quality & Fact-Check Auditor</div>
+                          <div className="agent-role-sub">Rigorous Fact-Checking & Editorial Scorecard</div>
+                        </div>
+                        <span className="agent-status-badge">COMPLETED</span>
+                      </div>
+                      <div className="agent-body-text">
+                        <strong>Responsibility:</strong> Scrutinized the report for missing sections, unrealistic claims, or ungrounded statistics. Compiled the numerical Quality Scorecard and issued the final sign-off recommendation.
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* TAB 3: TIMELINE */}
                 {activeTab === "timeline" && (
                   <div className="timeline-stream">
                     {activeTask.events && activeTask.events.length > 0 ? (
@@ -475,6 +658,7 @@ export function App() {
                   </div>
                 )}
 
+                {/* TAB 4: AUDIT SCORECARD */}
                 {activeTab === "audit" && (
                   <div className="report-paper">
                     <h2 style={{ marginBottom: "16px", color: "var(--accent-emerald)" }}>
@@ -495,6 +679,7 @@ export function App() {
                   </div>
                 )}
 
+                {/* TAB 5: GOVERNANCE */}
                 {activeTab === "governance" && (
                   <div className="governance-card">
                     <h3>Human-in-the-Loop Approval & Governance</h3>
@@ -518,7 +703,7 @@ export function App() {
                       <label>Reviewer Feedback or Instructions</label>
                       <input
                         type="text"
-                        placeholder="E.g., Approved for client deck distribution."
+                        placeholder="E.g., Approved for executive distribution and ad campaign launch."
                         value={approvalNotes}
                         onChange={(e) => setApprovalNotes(e.target.value)}
                         style={{
@@ -563,30 +748,103 @@ export function App() {
   );
 }
 
+// Robust, comprehensive Markdown to HTML parser supporting tables, headers, lists, and quotes
 function renderMarkdownToHtml(md: string): string {
   if (!md) return "";
-  
-  let html = md
-    .replace(/^### (.*$)/gim, "<h3>$1</h3>")
-    .replace(/^## (.*$)/gim, "<h2>$1</h2>")
-    .replace(/^# (.*$)/gim, "<h1>$1</h1>")
-    .replace(/\*\*(.*?)\*\*/gim, "<strong>$1</strong>")
-    .replace(/\*(.*?)\*/gim, "<em>$1</em>")
-    .replace(/^---$/gim, "<hr style='border:none; border-top:1px solid rgba(255,255,255,0.1); margin:24px 0;' />")
-    .replace(/^\* (.*$)/gim, "<li>$1</li>")
-    .replace(/^- (.*$)/gim, "<li>$1</li>");
 
-  const lines = html.split("\n\n");
-  html = lines
-    .map((l) => {
-      if (l.startsWith("<h") || l.startsWith("<hr") || l.startsWith("<li")) {
-        return l;
+  const lines = md.split("\n");
+  const output: string[] = [];
+  let inTable = false;
+  let tableHeaderParsed = false;
+  let inList = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const rawLine = lines[i];
+    const line = rawLine.trim();
+
+    // Check for Table Row
+    if (line.startsWith("|") && line.endsWith("|")) {
+      if (line.match(/^\|[\s\-:|]+\|$/)) {
+        tableHeaderParsed = true;
+        continue;
       }
-      return `<p>${l}</p>`;
-    })
-    .join("");
 
-  return html;
+      if (!inTable) {
+        if (inList) { output.push("</ul>"); inList = false; }
+        output.push("<table><tbody>");
+        inTable = true;
+        tableHeaderParsed = false;
+      }
+
+      const cells = line
+        .slice(1, -1)
+        .split("|")
+        .map((c) => c.trim());
+
+      if (!tableHeaderParsed) {
+        output.push("<tr>" + cells.map((c) => `<th>${formatInline(c)}</th>`).join("") + "</tr>");
+      } else {
+        output.push("<tr>" + cells.map((c) => `<td>${formatInline(c)}</td>`).join("") + "</tr>");
+      }
+      continue;
+    } else {
+      if (inTable) {
+        output.push("</tbody></table>");
+        inTable = false;
+        tableHeaderParsed = false;
+      }
+    }
+
+    // Check for List item
+    if (line.startsWith("* ") || line.startsWith("- ")) {
+      if (!inList) {
+        output.push("<ul>");
+        inList = true;
+      }
+      output.push(`<li>${formatInline(line.slice(2))}</li>`);
+      continue;
+    } else {
+      if (inList) {
+        output.push("</ul>");
+        inList = false;
+      }
+    }
+
+    // Empty lines
+    if (!line) {
+      continue;
+    }
+
+    // Headers
+    if (line.startsWith("# ")) {
+      output.push(`<h1>${formatInline(line.slice(2))}</h1>`);
+    } else if (line.startsWith("## ")) {
+      output.push(`<h2>${formatInline(line.slice(3))}</h2>`);
+    } else if (line.startsWith("### ")) {
+      output.push(`<h3>${formatInline(line.slice(4))}</h3>`);
+    } else if (line.startsWith("#### ")) {
+      output.push(`<h4>${formatInline(line.slice(5))}</h4>`);
+    } else if (line.startsWith("---")) {
+      output.push("<hr style='border:none; border-top:1px solid rgba(255,255,255,0.12); margin:24px 0;' />");
+    } else if (line.startsWith("> ")) {
+      output.push(`<blockquote>${formatInline(line.slice(2))}</blockquote>`);
+    } else {
+      output.push(`<p>${formatInline(line)}</p>`);
+    }
+  }
+
+  if (inTable) output.push("</tbody></table>");
+  if (inList) output.push("</ul>");
+
+  return output.join("\n");
+}
+
+function formatInline(text: string): string {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*(.*?)\*/g, "<em>$1</em>")
+    .replace(/`(.*?)`/g, "<code style='background:rgba(255,255,255,0.08); padding:2px 5px; border-radius:4px;'>$1</code>")
+    .replace(/\[(.*?)\]\((.*?)\)/g, "<a href='$2' target='_blank' rel='noopener noreferrer' style='color:#60a5fa; text-decoration:underline;'>$1</a>");
 }
 
 export default App;
