@@ -1,6 +1,7 @@
 ﻿"""
 AgentFlow AI - Multi-Agent Workflow Coordinator
 Coordinates the sequential execution of Researcher -> Analyst -> Writer -> Reviewer.
+Includes automatic rate limit recovery and RPM pacing for Google Gemini.
 """
 import time
 import logging
@@ -11,7 +12,8 @@ from backend.app.crew.agents import (
     create_data_analyst_agent,
     create_report_writer_agent,
     create_quality_reviewer_agent,
-    get_llm
+    get_llm,
+    DEFAULT_MAX_RPM
 )
 from backend.app.crew.tasks import (
     create_research_task,
@@ -25,15 +27,15 @@ logger = logging.getLogger("agentflow.crew.workflow")
 def run_agentflow_crew(
     query: str,
     csv_path: Optional[str] = None,
-    step_callback: Optional[callable] = None
+    progress_callback: Optional[callable] = None
 ) -> Dict[str, Any]:
     """
-    Executes the multi-agent business automation workflow.
+    Executes the multi-agent business automation workflow with rate limit resilience.
     
     Args:
         query: Business request submitted by user.
         csv_path: Optional path to uploaded CSV dataset.
-        step_callback: Optional callback for streaming agent events.
+        progress_callback: Optional callback for status notifications.
         
     Returns:
         Dictionary containing raw report, audit scorecard, timing, and status.
@@ -72,26 +74,43 @@ def run_agentflow_crew(
     review_task = create_quality_review_task(reviewer, report_task, query)
     tasks.append(review_task)
     
-    # 3. Assemble Crew
+    # 3. Assemble Crew with strict max_rpm to respect Gemini free-tier limits
     crew = Crew(
         agents=agents,
         tasks=tasks,
         process=Process.sequential,
+        max_rpm=DEFAULT_MAX_RPM,
         verbose=True,
     )
     
-    # 4. Execute Kickoff
-    logger.info(f"Kicking off Crew with {len(agents)} agents and {len(tasks)} tasks...")
-    crew_output = crew.kickoff()
+    # 4. Execute Kickoff with retry for 429 Rate Limits
+    logger.info(f"Kicking off Crew with {len(agents)} agents (max_rpm={DEFAULT_MAX_RPM})...")
+    
+    max_retries = 3
+    crew_output = None
+    
+    for attempt in range(1, max_retries + 1):
+        try:
+            crew_output = crew.kickoff()
+            break
+        except Exception as e:
+            err_msg = str(e)
+            if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
+                wait_time = 35 * attempt
+                logger.warning(f"Gemini Rate limit (429) hit on attempt {attempt}/{max_retries}. Pausing {wait_time}s for quota window reset...")
+                if progress_callback:
+                    progress_callback(f"Quota rate-limit encountered. Auto-cooling down for {wait_time}s before resuming...")
+                time.sleep(wait_time)
+            else:
+                raise e
+
+    if crew_output is None:
+        raise RuntimeError("Crew execution failed after rate limit retries.")
     
     elapsed_time = round(time.time() - start_time, 2)
     logger.info(f"Crew workflow completed in {elapsed_time}s.")
     
-    # Extract report output and review output
-    # By default, crew_output is the result of the final task (the Reviewer)
     final_output_str = str(crew_output)
-    
-    # Also extract intermediate task outputs
     report_content = str(report_task.output) if hasattr(report_task, "output") and report_task.output else final_output_str
     review_content = str(review_task.output) if hasattr(review_task, "output") and review_task.output else ""
     research_content = str(research_task.output) if hasattr(research_task, "output") and research_task.output else ""

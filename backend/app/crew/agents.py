@@ -1,12 +1,15 @@
 ﻿"""
 AgentFlow AI - Agent Definitions
-Defines specialized CrewAI agents powered by Google Gemini.
+Defines specialized CrewAI agents powered by Google Gemini with strict rate limit pacing.
 """
 from crewai import Agent, LLM
 from backend.app.core.config import settings
 from backend.app.tools.search_tool import web_search_tool
 from backend.app.tools.data_tool import analyze_csv_data_tool
 from backend.app.tools.report_tool import save_markdown_report_tool
+
+# Conservative RPM to respect Gemini Free Tier limits (<= 5 RPM)
+DEFAULT_MAX_RPM = 4
 
 def get_llm() -> LLM:
     """Instantiate configured Gemini LLM with controlled temperature."""
@@ -26,6 +29,7 @@ def create_supervisor_agent(llm: LLM = None) -> Agent:
             "focuses strictly on factual evidence, and maintain strict quality standards."
         ),
         llm=llm,
+        max_rpm=DEFAULT_MAX_RPM,
         verbose=True,
         allow_delegation=False,
     )
@@ -42,6 +46,7 @@ def create_researcher_agent(llm: LLM = None) -> Agent:
         ),
         tools=[web_search_tool],
         llm=llm,
+        max_rpm=DEFAULT_MAX_RPM,
         verbose=True,
         allow_delegation=False,
     )
@@ -58,6 +63,7 @@ def create_data_analyst_agent(llm: LLM = None) -> Agent:
         ),
         tools=[analyze_csv_data_tool],
         llm=llm,
+        max_rpm=DEFAULT_MAX_RPM,
         verbose=True,
         allow_delegation=False,
     )
@@ -74,6 +80,7 @@ def create_report_writer_agent(llm: LLM = None) -> Agent:
         ),
         tools=[save_markdown_report_tool],
         llm=llm,
+        max_rpm=DEFAULT_MAX_RPM,
         verbose=True,
         allow_delegation=False,
     )
@@ -89,6 +96,7 @@ def create_quality_reviewer_agent(llm: LLM = None) -> Agent:
             "that limitations are honestly disclosed, and that no unsupported claims are made."
         ),
         llm=llm,
+        max_rpm=DEFAULT_MAX_RPM,
         verbose=True,
         allow_delegation=False,
     )

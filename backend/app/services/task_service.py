@@ -1,6 +1,6 @@
 ﻿"""
 AgentFlow AI - Task Execution Service
-Handles asynchronous multi-agent task execution, state transitions, and database updates.
+Handles asynchronous multi-agent task execution, state transitions, database updates, and rate-limit events.
 """
 import uuid
 import threading
@@ -75,8 +75,11 @@ class TaskService:
             db.commit()
             TaskService._log_event(db, task_id, "Supervisor", "STARTED", "Strategic Supervisor initialized workflow.")
 
+            def progress_hook(msg: str):
+                TaskService._log_event(db, task_id, "System", "RATE_LIMIT_PAUSE", msg)
+
             # 2. Run Crew Workflow
-            result = run_agentflow_crew(query=query, csv_path=csv_path)
+            result = run_agentflow_crew(query=query, csv_path=csv_path, progress_callback=progress_hook)
 
             # 3. Update Record with Success Results
             record = db.query(TaskRecord).filter(TaskRecord.id == task_id).first()

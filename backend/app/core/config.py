@@ -23,10 +23,10 @@ class Settings(BaseSettings):
     
     # Gemini Configuration
     GEMINI_API_KEY: str = Field(default="", validation_alias="GEMINI_API_KEY")
-    GEMINI_MODEL: str = Field(default="gemini/gemini-3.5-flash", validation_alias="GEMINI_MODEL")
+    GEMINI_MODEL: str = Field(default="gemini/gemini-3.1-flash-lite", validation_alias="GEMINI_MODEL")
     DEFAULT_TEMPERATURE: float = 0.2
     
-    # Search API (Optional)
+    # Serper Search API
     SERPER_API_KEY: str = Field(default="", validation_alias="SERPER_API_KEY")
     
     # File Paths & Storage
