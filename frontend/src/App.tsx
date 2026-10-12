@@ -24,7 +24,8 @@ import {
   ShieldCheck, 
   Plus, 
   Sparkles,
-  Share2
+  Share2,
+  PanelLeftOpen
 } from "lucide-react";
 import "./App.css";
 
@@ -38,6 +39,7 @@ export function App() {
   const [isCreatingNew, setIsCreatingNew] = useState(false);
   const [activeTab, setActiveTab] = useState<"studio" | "report" | "pipeline" | "timeline" | "scorecard">("report");
   const [isMatrixOpen, setIsMatrixOpen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [searchFilter, setSearchFilter] = useState("");
   const [toast, setToast] = useState<ToastMessage | null>(null);
@@ -239,17 +241,24 @@ export function App() {
       {/* Toast Notification Container */}
       <Toast toast={toast} onClose={() => setToast(null)} />
 
-      {/* Top Main Navigation Header */}
+      {/* Top Main Navigation Header with Maximize/Minimize Workflows Toggle */}
       <Header
         health={health}
         onRefresh={loadInitialData}
         isRefreshing={isRefreshing}
         activeTask={activeTask}
-        onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+        isSidebarCollapsed={isSidebarCollapsed}
+        onToggleSidebar={() => {
+          if (window.innerWidth < 1024) {
+            setIsMobileSidebarOpen((prev) => !prev);
+          } else {
+            setIsSidebarCollapsed((prev) => !prev);
+          }
+        }}
       />
 
-      <div className="flex-1 flex overflow-hidden">
-        {/* Left Navigation Sidebar */}
+      <div className="flex-1 flex overflow-hidden relative">
+        {/* Left Navigation Sidebar with Maximize & Minimize Control */}
         <Sidebar
           tasks={tasks}
           selectedTaskId={activeTaskId}
@@ -257,14 +266,29 @@ export function App() {
           onSelectTask={handleSelectTask}
           onStartNew={handleStartNew}
           onDeleteTask={handleDeleteTask}
+          isCollapsed={isSidebarCollapsed}
+          onToggleCollapse={() => setIsSidebarCollapsed(true)}
           isMobileOpen={isMobileSidebarOpen}
           onCloseMobile={() => setIsMobileSidebarOpen(false)}
           searchFilter={searchFilter}
           onSearchChange={setSearchFilter}
         />
 
-        {/* Main Workspace Stage */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
+        {/* Floating Maximize Workflows Trigger when Collapsed on Desktop */}
+        {isSidebarCollapsed && (
+          <button
+            type="button"
+            onClick={() => setIsSidebarCollapsed(false)}
+            className="hidden lg:flex fixed left-5 bottom-6 z-40 items-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#0D121F]/95 hover:bg-[#141C2E] border border-cyan-500/40 text-cyan-300 shadow-xl shadow-cyan-500/20 backdrop-blur-md transition-all group animate-fade-in hover:scale-105 active:scale-95"
+            title="Maximize Recent Workflows (Show Sidebar)"
+          >
+            <PanelLeftOpen className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-semibold">Maximize Workflows ({tasks.length})</span>
+          </button>
+        )}
+
+        {/* Main Workspace Stage (Responsive & min-w-0 to prevent overlap) */}
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6 min-w-0">
           {/* Ambient Lighting & Tech Grid Overlay */}
           <div className="fixed inset-0 tech-grid-overlay pointer-events-none -z-10" />
           <div className="fixed top-1/4 left-1/3 w-[500px] h-[500px] ambient-radial-glow pointer-events-none -z-10" />

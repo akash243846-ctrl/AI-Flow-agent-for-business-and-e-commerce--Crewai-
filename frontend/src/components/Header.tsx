@@ -2,7 +2,8 @@ import {
   Sparkles, 
   RefreshCw, 
   Download, 
-  Menu,
+  PanelLeftClose,
+  PanelLeftOpen,
   FileText
 } from 'lucide-react';
 import type { SystemHealth, Task } from '../types';
@@ -13,7 +14,8 @@ interface HeaderProps {
   onRefresh: () => void;
   isRefreshing?: boolean;
   activeTask: Task | null;
-  onToggleMobileSidebar: () => void;
+  isSidebarCollapsed: boolean;
+  onToggleSidebar: () => void;
 }
 
 export function Header({
@@ -21,24 +23,33 @@ export function Header({
   onRefresh,
   isRefreshing,
   activeTask,
-  onToggleMobileSidebar
+  isSidebarCollapsed,
+  onToggleSidebar
 }: HeaderProps) {
   const isHealthy = Boolean(health);
 
   return (
     <header className="sticky top-0 z-30 h-16 bg-[#07090E]/85 backdrop-blur-xl border-b border-white/[0.08] px-4 sm:px-6 flex items-center justify-between transition-all">
-      {/* Left: Mobile Toggle & Brand Pill */}
-      <div className="flex items-center gap-3 sm:gap-4">
+      {/* Left: Sidebar Maximize/Minimize Toggle & Brand Pill */}
+      <div className="flex items-center gap-2.5 sm:gap-4">
         <button
-          onClick={onToggleMobileSidebar}
-          className="lg:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors"
-          title="Toggle Navigation"
+          onClick={onToggleSidebar}
+          className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/[0.08] border border-white/[0.08] flex items-center gap-2 transition-all active:scale-95 group shadow-sm"
+          title={isSidebarCollapsed ? "Maximize Recent Workflows (Show)" : "Minimize Recent Workflows (Hide)"}
+          aria-label={isSidebarCollapsed ? "Maximize Recent Workflows" : "Minimize Recent Workflows"}
         >
-          <Menu className="w-5 h-5" />
+          {isSidebarCollapsed ? (
+            <PanelLeftOpen className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
+          ) : (
+            <PanelLeftClose className="w-4 h-4 text-slate-400 group-hover:text-cyan-400 transition-colors" />
+          )}
+          <span className="hidden sm:inline text-xs font-semibold text-slate-300">
+            {isSidebarCollapsed ? "Show Workflows" : "Hide Workflows"}
+          </span>
         </button>
 
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/20 font-bold">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/20 font-bold shrink-0">
             <Sparkles className="w-4 h-4" />
           </div>
           <div>
@@ -68,47 +79,55 @@ export function Header({
       {/* Right: Actions & Real Connection Indicator */}
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Dynamic Real Backend Health Badge */}
-        <div 
-          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono border transition-all ${
+        <div
+          className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-medium backdrop-blur-md transition-all ${
             isHealthy
-              ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
-              : 'bg-amber-500/10 border-amber-500/20 text-amber-400'
+              ? 'bg-emerald-950/40 border-emerald-500/30 text-emerald-300'
+              : 'bg-rose-950/40 border-rose-500/30 text-rose-300'
           }`}
+          title={isHealthy ? 'Connected to FastAPI Backend (Uvicorn 127.0.0.1:8000)' : 'Backend Offline'}
         >
-          <span className={`w-1.5 h-1.5 rounded-full ${isHealthy ? 'bg-emerald-400' : 'bg-amber-400 animate-pulse'}`} />
-          <span className="hidden sm:inline">{isHealthy ? 'System Online' : 'Connecting...'}</span>
-          <span className="sm:hidden">{isHealthy ? 'Live' : 'Off'}</span>
+          <span
+            className={`w-2 h-2 rounded-full ${
+              isHealthy ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' : 'bg-rose-400 animate-pulse'
+            }`}
+          />
+          <span className="font-mono text-[11px] hidden sm:inline">
+            {isHealthy ? 'System Online' : 'Offline'}
+          </span>
         </div>
 
-        {/* Refresh Button */}
+        {/* Refresh / Reconnect Button */}
         <button
           onClick={onRefresh}
-          className="p-2 text-slate-400 hover:text-white bg-[#0D121F] hover:bg-[#141C2E] border border-white/[0.08] rounded-xl transition-all shadow-sm"
-          title="Refresh Workspace"
+          disabled={isRefreshing}
+          className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.06] border border-white/[0.06] transition-all disabled:opacity-50"
+          title="Refresh Engine State"
         >
-          <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+          <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-cyan-400' : ''}`} />
         </button>
 
-        {/* Download Clean Project Zip */}
+        {/* Download Project ZIP */}
         <a
           href="http://127.0.0.1:8000/api/download-project-zip"
           download="agentflow-ai.zip"
-          className="hidden sm:flex items-center gap-2 bg-[#0D121F] hover:bg-[#141C2E] text-slate-200 hover:text-white border border-white/[0.08] px-3.5 py-2 rounded-xl text-xs font-medium transition-all shadow-sm group"
-          title="Download Production Deployment Archive"
+          className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] transition-all hover:border-white/20"
+          title="Download complete project codebase archive"
         >
-          <Download className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-y-0.5 transition-transform" />
+          <Download className="w-3.5 h-3.5 text-cyan-400" />
           <span>Project ZIP</span>
         </a>
 
-        {/* Export Report Markdown */}
-        {activeTask?.report_markdown && (
+        {/* Export Report (Active Workflow) */}
+        {activeTask && activeTask.report_markdown && (
           <a
             href={getReportDownloadUrl(activeTask.id)}
-            download={`agentflow_${activeTask.id.slice(0, 8)}.md`}
-            className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-lg shadow-cyan-500/25 transition-all"
+            download={`AgentFlow_Report_${activeTask.id.slice(0, 8)}.md`}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 transition-all shadow-sm shadow-cyan-500/10"
+            title="Download verified markdown strategy report"
           >
             <FileText className="w-3.5 h-3.5" />
-            <span>Export Report</span>
+            <span className="hidden md:inline">Export Report</span>
           </a>
         )}
       </div>
