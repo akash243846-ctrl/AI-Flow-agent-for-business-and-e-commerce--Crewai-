@@ -1,0 +1,261 @@
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {"colors": {"surface-tint": "#adc6ff", "on-secondary-fixed": "#001f26", "outline-variant": "#424754", "tertiary-fixed": "#ffdcc6", "secondary": "#4cd7f6", "inverse-surface": "#e2e2ea", "outline": "#8c909f", "tertiary-fixed-dim": "#ffb786", "on-background": "#e2e2ea", "surface-container-lowest": "#0c0e13", "tertiary": "#ffb786", "primary-container": "#4d8eff", "error-container": "#93000a", "inverse-on-surface": "#2e3036", "on-error-container": "#ffdad6", "surface-container-highest": "#33353b", "surface": "#111319", "on-primary-fixed-variant": "#004395", "surface-dim": "#111319", "on-primary-fixed": "#001a42", "surface-container": "#1d2025", "surface-container-low": "#191c21", "surface-base": "#07090E", "border-subtle": "rgba(255, 255, 255, 0.08)", "error": "#ffb4ab", "on-primary": "#002e6a", "on-primary-container": "#00285d", "on-tertiary-container": "#461f00", "secondary-container": "#03b5d3", "primary": "#adc6ff", "on-tertiary-fixed-variant": "#723600", "on-surface-variant": "#c2c6d6", "amber": "#F59E0B", "surface-container-high": "#282a30", "surface-variant": "#33353b", "on-tertiary-fixed": "#311400", "secondary-fixed": "#acedff", "on-secondary-fixed-variant": "#004e5c", "primary-fixed-dim": "#adc6ff", "surface-overlay": "#141C2E", "on-secondary-container": "#00424e", "secondary-fixed-dim": "#4cd7f6", "surface-bright": "#37393f", "background": "#111319", "on-secondary": "#003640", "inverse-primary": "#005ac2", "on-surface": "#e2e2ea", "on-error": "#690005", "on-tertiary": "#502400", "surface-raised": "#0D121F", "rose": "#F43F5E", "tertiary-container": "#df7412", "emerald": "#10B981", "primary-fixed": "#d8e2ff"}, "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}, "spacing": {"gutter": "1.5rem", "space-xl": "2.5rem", "space-md": "1rem", "margin": "2rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem"}, "fontFamily": {"headline-lg": ["Inter"], "headline-sm": ["Inter"], "label-sm": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Inter"], "body-md": ["Inter"], "mono-data": ["JetBrains Mono"], "body-sm": ["Inter"], "headline-xl": ["Inter"]}, "fontSize": {"headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}], "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "500"}], "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}], "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}], "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "mono-data": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}], "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}], "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "600"}]}}}};</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"></head><body class="bg-surface font-body text-on-surface"><aside class="fixed left-0 top-0 h-full w-80 bg-surface-container-low z-50 flex flex-col pt-space-md pb-space-lg"><div class="px-space-gutter mb-space-md"><button class="w-full flex items-center justify-center gap-space-sm bg-primary hover:bg-primary-container text-on-primary font-headline-sm py-space-sm px-space-gutter rounded-xl transition-all shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined">add</span>Launch New Workflow</button></div><div class="px-space-gutter mb-space-md"><div class="flex items-center bg-surface-raised border border-subtle rounded-xl px-space-sm py-2 text-on-surface-variant"><span class="material-symbols-outlined text-sm mr-space-sm">search</span><span class="text-body-sm flex-1 font-mono-data">Search workflows...</span><span class="text-label-sm bg-surface-container px-1.5 py-0.5 rounded text-outline">⌘K</span></div></div><nav class="flex-1 px-space-md overflow-y-auto space-y-space-md" data-active-classes="bg-surface-container-high text-on-surface font-semibold"><div><div class="px-space-sm mb-space-xs text-label-sm text-outline tracking-wider uppercase">Workspace</div><div class="space-y-1 mb-space-md"><a aria-current="page" class="flex items-center gap-space-sm p-space-sm rounded-xl transition-all bg-surface-container-high text-on-surface font-semibold" data-path="configure-crew" href="#"><span class="material-symbols-outlined text-sm text-primary">group</span>Configure Crew</a></div><div class="px-space-sm mb-space-xs text-label-sm text-outline tracking-wider uppercase">Today</div><div class="space-y-1"><a class="flex flex-col p-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="market-research-q1" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Competitor AI Analysis</span><span class="text-emerald text-label-sm">SUCCESS</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span class="">1.2m</span><span class="">Gemini Flash</span></div></a><a class="flex flex-col p-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="lead-enrichment" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Q1 Lead Scraping &amp; Enr...</span><span class="text-amber text-label-sm">RUNNING</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span class="">45s</span><span class="">Serper + Gemini</span></div></a></div></div><div><div class="px-space-sm mb-space-xs text-label-sm text-outline tracking-wider uppercase">Past 7 Days</div><div class="space-y-1"><a class="flex flex-col p-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="seo-content-gen" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Automated SEO Cluster ...</span><span class="text-emerald text-label-sm">SUCCESS</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span class="">3.4m</span><span class="">CrewAI Multi</span></div></a></div></div></nav></aside><div class="pl-80"><header class="fixed top-0 left-80 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-gutter"><div class="flex items-center gap-space-md"><img alt="AgentFlow Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgLfSlBrdkHlYbbnh4kRYKb17myiaT9LwP-mTYQhK5099HFA8rLSHLzYvBq-OTRd4AQqDCXSjfWfjdQnojOUYr5i9H4ipKAqiOyreRnubiOyDJuct4LY2o-mO8fxwNy-SF2CEe5JclvsrqkGT2uctnrghC5bSKXqEhOrQvgESlJ2lV_l-7NHsvEj7LHeTjHi7C0L5o-QBcM2hVRvNmJO2mnlA1xkQU5PFDBU6hHCOXKheeESF19oc"><span class="text-headline-sm font-bold text-on-surface">AgentFlow AI</span><div class="h-4 w-[1px] bg-outline-variant"></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded-full border border-subtle"><span class="w-2 h-2 rounded-full bg-emerald animate-pulse"></span><span class="text-mono-data text-on-surface-variant">gemini/gemini-3.1-flash-lite</span></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded-full border border-subtle"><span class="material-symbols-outlined text-sm text-primary">search</span><span class="text-mono-data text-on-surface-variant">Serper</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-emerald/10 text-emerald px-space-sm py-1 rounded-full text-mono-data"><span class="w-1.5 h-1.5 rounded-full bg-emerald"></span>System Healthy</div><button class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface bg-surface-container hover:bg-surface-container-high px-space-sm py-2 rounded-xl transition-all border border-subtle"><span class="material-symbols-outlined text-sm">refresh</span></button><button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-2 rounded-xl transition-all border border-subtle font-medium text-body-sm"><span class="material-symbols-outlined text-sm">download</span>Export Report</button><div class="h-6 w-[1px] bg-outline-variant"></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-subtle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArfMqcf0eC_iAcoJO4vSIbrOe3gtH1wFhJZDYIkKBXmLOEQmAz0tLKBibhkOP_lVL9_vycygoSm4Fz9vkaF5lmAOskvLqxztQZFM4eRyfNZiywA1F9iNUO_jvrjuo0JndfQmWLgB8fZBhAG4OUZZinvQaJUU-qU6WcipyuiFSw3sIbmNVJyV-6zC3lEUv4qtVH-xClnrJfIRX1CYpDExVubJoBgu4K2unae1kyN1gmzGBDewQ7EyA"></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin pb-24 space-y-space-xl">
+<!-- Top Banner / Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md pt-space-md">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-sm text-label-sm text-primary tracking-wider uppercase font-mono-data">
+<span class="material-symbols-outlined text-sm">settings_input_component</span>
+        AgentFlow Orchestration Studio
+      </div>
+<h1 class="text-headline-lg font-bold text-on-surface">Configure Custom Multi-Agent Crew</h1>
+<p class="text-body-md text-on-surface-variant max-w-2xl">
+        Design and orchestrate custom autonomous agent teams with specialized LLM backends, memory systems, and tool bindings.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-2.5 rounded-xl transition-all font-medium text-body-sm shadow-sm">
+<span class="material-symbols-outlined text-sm text-outline">bookmark</span>
+        Save Preset
+      </button>
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-2.5 rounded-xl transition-all font-medium text-body-sm shadow-sm">
+<span class="material-symbols-outlined text-sm text-secondary">play_arrow</span>
+        Test Run Crew
+      </button>
+<button class="flex items-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary px-space-lg py-2.5 rounded-xl transition-all font-headline-sm shadow-md">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+        Deploy to Production
+      </button>
+</div>
+</div>
+<!-- Topology Selector -->
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<h2 class="text-headline-md font-medium text-on-surface">Crew Architecture Topology</h2>
+<span class="text-mono-data text-outline">Select execution strategy</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Option 1 -->
+<div class="topology-card cursor-pointer bg-surface-raised p-space-lg rounded-xl transition-all border-2 border-primary ring-2 ring-primary/20 relative overflow-hidden group" id="topo-sequential" onclick="setTopology('sequential')">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all"></div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">linear_scale</span>
+</div>
+<span class="material-symbols-outlined text-primary topology-check">check_circle</span>
+</div>
+<h3 class="text-headline-sm text-on-surface mb-1">Sequential Pipeline</h3>
+<p class="text-body-sm text-on-surface-variant">Agents execute in strict linear handoff order with state pass-through.</p>
+</div>
+<!-- Option 2 -->
+<div class="topology-card cursor-pointer bg-surface-raised p-space-lg rounded-xl transition-all border-2 border-transparent hover:border-outline-variant relative overflow-hidden group" id="topo-hierarchical" onclick="setTopology('hierarchical')">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full blur-2xl group-hover:bg-secondary/10 transition-all"></div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined">account_tree</span>
+</div>
+<span class="material-symbols-outlined text-outline topology-check hidden">check_circle</span>
+</div>
+<h3 class="text-headline-sm text-on-surface mb-1">Hierarchical Manager</h3>
+<p class="text-body-sm text-on-surface-variant">Strategic Supervisor delegates tasks dynamically to specialized worker nodes.</p>
+</div>
+<!-- Option 3 -->
+<div class="topology-card cursor-pointer bg-surface-raised p-space-lg rounded-xl transition-all border-2 border-transparent hover:border-outline-variant relative overflow-hidden group" id="topo-swarm" onclick="setTopology('swarm')">
+<div class="absolute top-0 right-0 w-32 h-32 bg-tertiary/5 rounded-full blur-2xl group-hover:bg-tertiary/10 transition-all"></div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-10 h-10 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<span class="material-symbols-outlined text-outline topology-check hidden">check_circle</span>
+</div>
+<h3 class="text-headline-sm text-on-surface mb-1">Autonomous Swarm</h3>
+<p class="text-body-sm text-on-surface-variant">Decentralized peer-to-peer agent collaboration graph with shared memory.</p>
+</div>
+</div>
+</div>
+<!-- Main Workspace Grid: Agents vs Settings & Code -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg items-start">
+<!-- Left 2 Cols: Agent Roster Builder -->
+<div class="lg:col-span-2 space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<h2 class="text-headline-md font-medium text-on-surface">Active Agent Roster</h2>
+<span class="bg-surface-container text-on-surface-variant px-2 py-0.5 rounded text-mono-data">4 Nodes</span>
+</div>
+<button class="flex items-center gap-space-xs text-primary hover:text-primary-container font-medium text-body-sm bg-primary/10 hover:bg-primary/20 px-space-md py-2 rounded-xl transition-all" onclick="openAddAgentModal()">
+<span class="material-symbols-outlined text-sm">add</span>
+          Add Custom Agent Role
+        </button>
+</div>
+<div class="space-y-space-md" id="agent-roster-list"></div>
+</div>
+<!-- Right Col: Global Crew Settings & YAML Code Inspector -->
+<div class="space-y-space-lg">
+<!-- Global Crew Settings -->
+<div class="bg-surface-raised p-space-lg rounded-xl space-y-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<h2 class="text-headline-sm font-medium text-on-surface">Global Settings</h2>
+<span class="material-symbols-outlined text-outline">tune</span>
+</div>
+<div class="space-y-space-md">
+<!-- Max Iterations -->
+<div class="space-y-2">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Max Iterations</span>
+<span class="font-mono-data text-primary">25</span>
+</div>
+<input class="w-full accent-primary bg-surface-container rounded-lg h-2 cursor-pointer" max="100" min="5" type="range" value="25">
+</div>
+<!-- Memory Buffer Size -->
+<div class="space-y-2">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Memory Buffer Window</span>
+<span class="font-mono-data text-secondary">4,096 tokens</span>
+</div>
+<input class="w-full accent-secondary bg-surface-container rounded-lg h-2 cursor-pointer" max="16384" min="1024" step="1024" type="range" value="4096">
+</div>
+<!-- Rate Limiting RPM -->
+<div class="space-y-2">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Rate Limiting (RPM Budget)</span>
+<span class="font-mono-data text-amber">60 RPM</span>
+</div>
+<input class="w-full accent-amber bg-surface-container rounded-lg h-2 cursor-pointer" max="200" min="10" step="10" type="range" value="60">
+</div>
+<!-- Toggles -->
+<div class="pt-space-sm space-y-space-sm border-t border-subtle">
+<div class="flex items-center justify-between">
+<div>
+<span class="text-body-sm text-on-surface font-medium block">Verbose Logging</span>
+<span class="text-label-sm text-outline">Stream step telemetry to console</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-body-sm text-on-surface font-medium block">Auto-Recovery Fault Tolerance</span>
+<span class="text-label-sm text-outline">Retry failed agent calls on timeout</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- YAML SDK Inspector -->
+<div class="bg-surface-raised rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="flex items-center justify-between px-space-md py-3 bg-surface-container-low border-b border-subtle">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-rose"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-amber"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-emerald"></span>
+<span class="text-mono-data text-outline ml-space-xs">crew_config.yaml</span>
+</div>
+<button class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface text-label-sm bg-surface-container px-2 py-1 rounded transition-all" onclick="copyYamlPayload()">
+<span class="material-symbols-outlined text-xs">content_copy</span>
+            Copy SDK
+          </button>
+</div>
+<div class="p-space-md font-mono-data text-body-sm text-on-surface-variant overflow-x-auto max-h-96 leading-relaxed">
+<span class="text-primary">version:</span> <span class="text-on-surface">"3.1.0"</span><br>
+<span class="text-primary">crew_name:</span> <span class="text-on-surface">"Autonomous Market Intelligence"</span><br>
+<span class="text-primary">process:</span> <span class="text-amber">hierarchical</span><br>
+<span class="text-primary">manager_agent:</span> <span class="text-on-surface">"strategic_supervisor"</span><br><br>
+<span class="text-primary">agents:</span><br>
+          &nbsp;&nbsp;<span class="text-secondary">- id:</span> <span class="text-on-surface">strategic_supervisor</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-outline">model:</span> <span class="text-on-surface">gemini/gemini-3.1-flash-lite</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-outline">temperature:</span> <span class="text-amber">0.2</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-outline">memory:</span> <span class="text-on-surface">true</span><br><br>
+          &nbsp;&nbsp;<span class="text-secondary">- id:</span> <span class="text-on-surface">market_researcher</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-outline">model:</span> <span class="text-on-surface">gemini/gemini-3.1-flash</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-outline">tools:</span> <span class="text-on-surface">[serper, scraper]</span><br><br>
+<span class="text-primary">guardrails:</span><br>
+          &nbsp;&nbsp;<span class="text-outline">max_iter:</span> <span class="text-amber">25</span><br>
+          &nbsp;&nbsp;<span class="text-outline">rpm_limit:</span> <span class="text-amber">60</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Custom Agent Role Modal (Hidden by default, toggled via JS) -->
+<div class="fixed inset-0 z-50 bg-surface-base/80 backdrop-blur-md flex items-center justify-center p-space-md hidden" id="add-agent-modal">
+<div class="bg-surface-raised w-full max-w-xl rounded-xl shadow-2xl p-space-lg space-y-space-md border border-subtle">
+<div class="flex items-center justify-between">
+<h3 class="text-headline-md font-medium text-on-surface">Configure New Custom Agent</h3>
+<button class="text-outline hover:text-on-surface" onclick="closeAddAgentModal()"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="space-y-space-md">
+<div>
+<label class="block text-label-sm uppercase font-mono-data text-outline mb-1">Agent Name &amp; Role</label>
+<input class="w-full bg-surface-container-low border border-subtle rounded-xl px-space-md py-2.5 text-on-surface font-body focus:outline-none focus:border-primary" placeholder="e.g. Code Review Architect" type="text">
+</div>
+<div class="grid grid-cols-2 gap-space-md">
+<div>
+<label class="block text-label-sm uppercase font-mono-data text-outline mb-1">Model Backend</label>
+<select class="w-full bg-surface-container-low border border-subtle rounded-xl px-space-md py-2.5 text-on-surface font-body focus:outline-none focus:border-primary">
+<option>Gemini 3.1 Flash Lite</option>
+<option>Gemini 3.1 Flash</option>
+<option>Gemini 3.1 Pro</option>
+<option>CrewAI Multi-Eval</option>
+</select>
+</div>
+<div>
+<label class="block text-label-sm uppercase font-mono-data text-outline mb-1">Temperature (0.0 - 1.0)</label>
+<input class="w-full bg-surface-container-low border border-subtle rounded-xl px-space-md py-2.5 text-on-surface font-body focus:outline-none focus:border-primary font-mono-data" max="1" min="0" step="0.1" type="number" value="0.3">
+</div>
+</div>
+<div>
+<label class="block text-label-sm uppercase font-mono-data text-outline mb-1">System Prompt Directive</label>
+<textarea class="w-full bg-surface-container-low border border-subtle rounded-xl p-space-md text-on-surface font-body focus:outline-none focus:border-primary" placeholder="You are an expert autonomous code reviewer..." rows="3"></textarea>
+</div>
+<div>
+<label class="block text-label-sm uppercase font-mono-data text-outline mb-2">Tool Bindings</label>
+<div class="grid grid-cols-2 gap-space-sm text-body-sm text-on-surface-variant">
+<label class="flex items-center gap-space-xs cursor-pointer"><input checked="" class="accent-primary" type="checkbox"> Google Serper API</label>
+<label class="flex items-center gap-space-xs cursor-pointer"><input class="accent-primary" type="checkbox"> Python REPR Sandbox</label>
+<label class="flex items-center gap-space-xs cursor-pointer"><input checked="" class="accent-primary" type="checkbox"> Web Scraper</label>
+<label class="flex items-center gap-space-xs cursor-pointer"><input class="accent-primary" type="checkbox"> Compliance Engine</label>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-md border-t border-subtle">
+<button class="px-space-md py-2 text-on-surface-variant hover:text-on-surface font-medium text-body-sm" onclick="closeAddAgentModal()">Cancel</button>
+<button class="px-space-lg py-2 bg-primary hover:bg-primary-container text-on-primary rounded-xl font-headline-sm" onclick="closeAddAgentModal()">Attach Agent to Crew</button>
+</div>
+</div>
+</div>
+<script>
+    function setTopology(mode) {
+      document.querySelectorAll('.topology-card').forEach(card => {
+        card.classList.remove('border-primary', 'ring-2', 'ring-primary/20');
+        card.classList.add('border-transparent');
+        card.querySelector('.topology-check').classList.add('hidden');
+        card.querySelector('.topology-check').classList.remove('text-primary');
+      });
+      const selected = document.getElementById('topo-' + mode);
+      selected.classList.remove('border-transparent');
+      selected.classList.add('border-primary', 'ring-2', 'ring-primary/20');
+      const check = selected.querySelector('.topology-check');
+      check.classList.remove('hidden');
+      check.classList.add('text-primary');
+    }
+
+    function openAddAgentModal() {
+      document.getElementById('add-agent-modal').classList.remove('hidden');
+    }
+
+    function closeAddAgentModal() {
+      document.getElementById('add-agent-modal').classList.add('hidden');
+    }
+
+    function copyYamlPayload() {
+      alert('Copied live CrewAI YAML payload to clipboard!');
+    }
+  </script>
+</div></main></div>
+
+</body></html>

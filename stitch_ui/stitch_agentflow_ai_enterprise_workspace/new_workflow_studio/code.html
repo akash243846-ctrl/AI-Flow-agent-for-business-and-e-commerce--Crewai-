@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {"colors": {"surface-tint": "#adc6ff", "on-secondary-fixed": "#001f26", "outline-variant": "#424754", "tertiary-fixed": "#ffdcc6", "secondary": "#4cd7f6", "inverse-surface": "#e2e2ea", "outline": "#8c909f", "tertiary-fixed-dim": "#ffb786", "on-background": "#e2e2ea", "surface-container-lowest": "#0c0e13", "tertiary": "#ffb786", "primary-container": "#4d8eff", "error-container": "#93000a", "inverse-on-surface": "#2e3036", "on-error-container": "#ffdad6", "surface-container-highest": "#33353b", "surface": "#111319", "on-primary-fixed-variant": "#004395", "surface-dim": "#111319", "on-primary-fixed": "#001a42", "surface-container": "#1d2025", "surface-container-low": "#191c21", "surface-base": "#07090E", "border-subtle": "rgba(255, 255, 255, 0.08)", "error": "#ffb4ab", "on-primary": "#002e6a", "on-primary-container": "#00285d", "on-tertiary-container": "#461f00", "secondary-container": "#03b5d3", "primary": "#adc6ff", "on-tertiary-fixed-variant": "#723600", "on-surface-variant": "#c2c6d6", "amber": "#F59E0B", "surface-container-high": "#282a30", "surface-variant": "#33353b", "on-tertiary-fixed": "#311400", "secondary-fixed": "#acedff", "on-secondary-fixed-variant": "#004e5c", "primary-fixed-dim": "#adc6ff", "surface-overlay": "#141C2E", "on-secondary-container": "#00424e", "secondary-fixed-dim": "#4cd7f6", "surface-bright": "#37393f", "background": "#111319", "on-secondary": "#003640", "inverse-primary": "#005ac2", "on-surface": "#e2e2ea", "on-error": "#690005", "on-tertiary": "#502400", "surface-raised": "#0D121F", "rose": "#F43F5E", "tertiary-container": "#df7412", "emerald": "#10B981", "primary-fixed": "#d8e2ff"}, "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}, "spacing": {"gutter": "1.5rem", "space-xl": "2.5rem", "space-md": "1rem", "margin": "2rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem"}, "fontFamily": {"headline-lg": ["Inter"], "headline-sm": ["Inter"], "label-sm": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Inter"], "body-md": ["Inter"], "mono-data": ["JetBrains Mono"], "body-sm": ["Inter"], "headline-xl": ["Inter"]}, "fontSize": {"headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}], "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "500"}], "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}], "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}], "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "mono-data": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}], "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}], "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "600"}]}}}};</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-surface font-body text-on-surface"><aside class="fixed left-0 top-0 h-full w-80 bg-surface-container-low z-50 flex flex-col pt-space-md pb-space-lg"><div class="px-space-gutter mb-space-md"><button class="w-full flex items-center justify-center gap-space-sm bg-primary hover:bg-primary-container text-on-primary font-headline-sm py-space-sm px-space-gutter rounded-xl transition-all shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined">add</span>Launch New Workflow</button></div><div class="px-space-gutter mb-space-md"><div class="flex items-center bg-surface-raised border border-subtle rounded-xl px-space-sm py-2 text-on-surface-variant"><span class="material-symbols-outlined text-sm mr-space-sm">search</span><span class="text-body-sm flex-1 font-mono-data">Search workflows...</span><span class="text-label-sm bg-surface-container px-1.5 py-0.5 rounded text-outline">⌘K</span></div></div><nav class="flex-1 px-space-md overflow-y-auto space-y-space-md" data-active-classes="bg-surface-container-high text-on-surface font-semibold"><div><div class="px-space-sm mb-space-xs text-label-sm text-outline tracking-wider uppercase">Today</div><div class="space-y-1"><a aria-current="page" class="flex flex-col p-space-sm rounded-xl transition-all bg-surface-container-high text-on-surface font-semibold" data-path="market-research-q1" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Competitor AI Analysis</span><span class="text-emerald text-label-sm">SUCCESS</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span>1.2m</span><span>Gemini Flash</span></div></a><a class="flex flex-col p-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="lead-enrichment" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Q1 Lead Scraping &amp; Enr...</span><span class="text-amber text-label-sm">RUNNING</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span>45s</span><span>Serper + Gemini</span></div></a></div></div><div><div class="px-space-sm mb-space-xs text-label-sm text-outline tracking-wider uppercase">Past 7 Days</div><div class="space-y-1"><a class="flex flex-col p-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="seo-content-gen" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Automated SEO Cluster ...</span><span class="text-emerald text-label-sm">SUCCESS</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span>3.4m</span><span>CrewAI Multi</span></div></a></div></div></nav></aside><div class="pl-80"><header class="fixed top-0 left-80 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-gutter"><div class="flex items-center gap-space-md"><img alt="AgentFlow Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgLfSlBrdkHlYbbnh4kRYKb17myiaT9LwP-mTYQhK5099HFA8rLSHLzYvBq-OTRd4AQqDCXSjfWfjdQnojOUYr5i9H4ipKAqiOyreRnubiOyDJuct4LY2o-mO8fxwNy-SF2CEe5JclvsrqkGT2uctnrghC5bSKXqEhOrQvgESlJ2lV_l-7NHsvEj7LHeTjHi7C0L5o-QBcM2hVRvNmJO2mnlA1xkQU5PFDBU6hHCOXKheeESF19oc"/><span class="text-headline-sm font-bold text-on-surface">AgentFlow AI</span><div class="h-4 w-[1px] bg-outline-variant"></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded-full border border-subtle"><span class="w-2 h-2 rounded-full bg-emerald animate-pulse"></span><span class="text-mono-data text-on-surface-variant">gemini/gemini-3.1-flash-lite</span></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded-full border border-subtle"><span class="material-symbols-outlined text-sm text-primary">search</span><span class="text-mono-data text-on-surface-variant">Serper</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-emerald/10 text-emerald px-space-sm py-1 rounded-full text-mono-data"><span class="w-1.5 h-1.5 rounded-full bg-emerald"></span>System Healthy</div><button class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface bg-surface-container hover:bg-surface-container-high px-space-sm py-2 rounded-xl transition-all border border-subtle"><span class="material-symbols-outlined text-sm">refresh</span></button><button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-2 rounded-xl transition-all border border-subtle font-medium text-body-sm"><span class="material-symbols-outlined text-sm">download</span>Export Report</button><div class="h-6 w-[1px] bg-outline-variant"></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-subtle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArfMqcf0eC_iAcoJO4vSIbrOe3gtH1wFhJZDYIkKBXmLOEQmAz0tLKBibhkOP_lVL9_vycygoSm4Fz9vkaF5lmAOskvLqxztQZFM4eRyfNZiywA1F9iNUO_jvrjuo0JndfQmWLgB8fZBhAG4OUZZinvQaJUU-qU6WcipyuiFSw3sIbmNVJyV-6zC3lEUv4qtVH-xClnrJfIRX1CYpDExVubJoBgu4K2unae1kyN1gmzGBDewQ7EyA"/></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full text-on-surface p-space-gutter space-y-space-xl max-w-7xl mx-auto">
+<!-- 1. Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md pt-space-md">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-sm text-label-sm uppercase tracking-wider text-primary font-mono-data">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span>Studio Workspace v3.4</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Universal Business &amp; E-Commerce Strategy Engine</h1>
+<p class="font-body-lg text-on-surface-variant max-w-3xl">Orchestrate multi-agent autonomous crews to analyze market vectors, compute unit economics, and deploy hyper-targeted growth blueprints.</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="bg-surface-raised border border-subtle px-space-md py-space-sm rounded-xl flex items-center gap-space-sm shadow-sm">
+<span class="material-symbols-outlined text-primary">hub</span>
+<div class="flex flex-col text-left">
+<span class="text-label-sm text-outline">Active Crew</span>
+<span class="text-body-sm font-semibold text-on-surface">Gemini Flash + CrewAI Multi</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 2. Quick-Select Category Presets -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-mono-data text-label-sm text-outline uppercase tracking-wider">Quick-Select Strategic Presets</span>
+<span class="font-mono-data text-label-sm text-primary cursor-pointer hover:underline">View All 24 Presets</span>
+</div>
+<div class="flex items-center gap-space-sm overflow-x-auto pb-space-xs no-scrollbar">
+<!-- Active Preset -->
+<button class="flex items-center gap-space-sm bg-primary-container text-on-primary-container font-medium px-space-md py-2.5 rounded-xl text-body-sm whitespace-nowrap shadow-[0_0_20px_rgba(77,142,255,0.2)] transition-all">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>D2C E-Commerce: Indian Kidswear &amp; 30-Day Growth</span>
+</button>
+<!-- Inactive Presets -->
+<button class="flex items-center gap-space-sm bg-surface-raised hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-subtle px-space-md py-2.5 rounded-xl text-body-sm whitespace-nowrap transition-all">
+<span class="material-symbols-outlined text-sm text-secondary">bolt</span>
+<span>Quick-Commerce: Blinkit/Zepto vs Amazon Margins</span>
+</button>
+<button class="flex items-center gap-space-sm bg-surface-raised hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-subtle px-space-md py-2.5 rounded-xl text-body-sm whitespace-nowrap transition-all">
+<span class="material-symbols-outlined text-sm text-amber">corporate_fare</span>
+<span>B2B SaaS: Enterprise Churn &amp; CRM Pricing</span>
+</button>
+<button class="flex items-center gap-space-sm bg-surface-raised hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-subtle px-space-md py-2.5 rounded-xl text-body-sm whitespace-nowrap transition-all">
+<span class="material-symbols-outlined text-sm text-emerald">public</span>
+<span>Cross-Border: Shopify US/UAE Export Blueprint</span>
+</button>
+<button class="flex items-center gap-space-sm bg-surface-raised hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-subtle px-space-md py-2.5 rounded-xl text-body-sm whitespace-nowrap transition-all">
+<span class="material-symbols-outlined text-sm text-rose">monitoring</span>
+<span>Performance Marketing: CAC/ROAS Unit Economics</span>
+</button>
+</div>
+</div>
+<!-- 3. Query Textarea & 4. CSV Dataset Dropzone (Bento Grid Layout) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<!-- Query Input Section (2 Cols) -->
+<div class="lg:col-span-2 bg-surface-raised border border-subtle rounded-2xl p-space-md flex flex-col justify-between shadow-xl relative overflow-hidden group">
+<div class="absolute -right-20 -top-20 w-60 h-60 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary">edit_square</span>
+<span class="font-headline-sm text-on-surface">Strategic Objective &amp; Constraints</span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container px-2.5 py-1 rounded-full border border-subtle font-mono-data text-label-sm text-outline">
+<span id="char-count">412</span> / 2,000 chars
+        </div>
+</div>
+<div class="relative flex-1 mb-space-md">
+<textarea class="w-full bg-surface-container-low text-on-surface placeholder:text-outline p-space-md rounded-xl border border-subtle focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none font-body-lg resize-none transition-all" id="strategy-input" placeholder="Enter your strategic business objective, market constraints, or upload dataset..." rows="6">Analyze the 30-day growth potential for an organic cotton kidswear brand launching on Amazon India vs Direct-to-Consumer (Shopify). Factor in a ₹15 Lakh performance marketing budget, 42% average return rates in tier-1 metros, and a target CAC under ₹450. Output a multi-tier pricing elasticity model and fulfillment logistics split between Delhivery and Amazon FBA.</textarea>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-sm border-t border-subtle/50">
+<div class="flex items-center gap-space-sm text-body-sm text-outline">
+<span class="material-symbols-outlined text-sm text-emerald">auto_awesome</span>
+<span>AI context-aware prompt enhancement enabled</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface px-space-sm py-1.5 rounded-lg text-body-sm font-medium border border-subtle transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-sm">magic_button</span>Enhance
+          </button>
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface px-space-sm py-1.5 rounded-lg text-body-sm font-medium border border-subtle transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-sm">clear</span>Clear
+          </button>
+</div>
+</div>
+</div>
+<!-- CSV Dataset Dropzone (1 Col) -->
+<div class="bg-surface-raised border border-subtle rounded-2xl p-space-md flex flex-col justify-between shadow-xl relative overflow-hidden">
+<div class="absolute -left-20 -bottom-20 w-60 h-60 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary">database</span>
+<span class="font-headline-sm text-on-surface">Dataset Ingestion</span>
+</div>
+<span class="font-mono-data text-label-sm text-secondary bg-secondary/10 px-2 py-0.5 rounded">Optional</span>
+</div>
+<!-- Dropzone Container -->
+<div class="flex-1 border-2 border-dashed border-outline-variant/40 hover:border-primary/50 bg-surface-container-low/50 hover:bg-surface-container-low rounded-xl p-space-md flex flex-col items-center justify-center text-center cursor-pointer transition-all group my-2">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-space-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl">cloud_upload</span>
+</div>
+<span class="font-medium text-body-md text-on-surface mb-1">Drag &amp; drop files here</span>
+<span class="font-body-sm text-outline mb-space-md">.csv, .tsv up to 10MB</span>
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface text-body-sm font-medium px-space-md py-1.5 rounded-lg border border-subtle transition-all">
+          Browse Files
+        </button>
+</div>
+<!-- Sample Preview Chip -->
+<div class="mt-space-sm">
+<span class="font-mono-data text-label-sm text-outline uppercase tracking-wider block mb-space-xs">Attached Datasets</span>
+<div class="flex items-center justify-between bg-surface-container border border-subtle p-space-sm rounded-xl">
+<div class="flex items-center gap-space-sm overflow-hidden">
+<span class="material-symbols-outlined text-emerald text-sm">description</span>
+<div class="flex flex-col truncate">
+<span class="text-body-sm font-medium text-on-surface truncate">dataset_q1_sales.csv</span>
+<span class="text-mono-data text-outline text-xs">2.4 MB • 14,200 rows</span>
+</div>
+</div>
+<button class="text-outline hover:text-rose transition-colors p-1">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Advanced Parameters & Toggle Panel -->
+<div class="bg-surface-raised border border-subtle rounded-2xl p-space-md grid grid-cols-1 md:grid-cols-4 gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<span class="font-mono-data text-label-sm text-outline uppercase tracking-wider">Execution Speed</span>
+<select class="bg-surface-container-low text-on-surface border border-subtle rounded-xl p-2.5 text-body-sm focus:border-primary focus:outline-none">
+<option>Ultra-Fast (Flash / 1-pass)</option>
+<option selected="">Deep Reasoning (Pro / 3-pass)</option>
+<option>Exhaustive Multi-Agent Crew</option>
+</select>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-mono-data text-label-sm text-outline uppercase tracking-wider">Target Market Region</span>
+<select class="bg-surface-container-low text-on-surface border border-subtle rounded-xl p-2.5 text-body-sm focus:border-primary focus:outline-none">
+<option selected="">India (Tier 1 &amp; Metro Focus)</option>
+<option>North America (US/CA)</option>
+<option>GCC / Middle East (UAE/KSA)</option>
+<option>Global / Cross-Border</option>
+</select>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-mono-data text-label-sm text-outline uppercase tracking-wider">Output Deliverable</span>
+<select class="bg-surface-container-low text-on-surface border border-subtle rounded-xl p-2.5 text-body-sm focus:border-primary focus:outline-none">
+<option selected="">Executive Strategic Briefing (.PDF)</option>
+<option>Financial Model &amp; Unit Economics (.XLSX)</option>
+<option>Full Crew Code &amp; Markdown Repo</option>
+</select>
+</div>
+<div class="flex flex-col gap-space-xs justify-end">
+<div class="flex items-center justify-between bg-surface-container-low border border-subtle p-3 rounded-xl">
+<span class="text-body-sm text-on-surface font-medium">Web Search Grounding</span>
+<input checked="" class="accent-primary w-4 h-4 rounded cursor-pointer" type="checkbox"/>
+</div>
+</div>
+</div>
+<!-- 5. Submit Button / Kickoff Bar -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-sm pb-space-lg">
+<div class="flex items-center gap-space-sm text-outline text-body-sm">
+<span class="material-symbols-outlined text-primary text-sm animate-spin">sync</span>
+<span>Estimated execution time: <strong class="text-on-surface font-mono-data">45 seconds</strong> across 4 parallel agent nodes</span>
+</div>
+<button class="w-full sm:w-auto flex items-center justify-center gap-space-sm bg-primary hover:bg-primary-container text-on-primary font-headline-sm py-3.5 px-space-xl rounded-xl transition-all shadow-[0_0_30px_rgba(173,198,255,0.3)] hover:scale-[1.02] cursor-pointer" id="kickoff-btn" onclick="simulateLoading(this)">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span>Kickoff AgentFlow Crew</span>
+</button>
+</div>
+</div>
+<script>
+  function simulateLoading(btn) {
+    const originalContent = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = `
+      <span class="material-symbols-outlined animate-spin">progress_activity</span>
+      <span>Deploying Agent Crew...</span>
+    `;
+    btn.classList.add('opacity-80');
+    
+    setTimeout(() => {
+      btn.innerHTML = `
+        <span class="material-symbols-outlined text-emerald">check</span>
+        <span>Crew Active & Running</span>
+      `;
+      btn.classList.remove('bg-primary', 'hover:bg-primary-container', 'text-on-primary');
+      btn.classList.add('bg-emerald/20', 'text-emerald', 'border', 'border-emerald/30');
+    }, 2000);
+  }
+
+  // Live character counter simulation
+  const textarea = document.getElementById('strategy-input');
+  const counter = document.getElementById('char-count');
+  if (textarea && counter) {
+    textarea.addEventListener('input', () => {
+      counter.textContent = textarea.value.length;
+    });
+  }
+</script></main></div></body></html>

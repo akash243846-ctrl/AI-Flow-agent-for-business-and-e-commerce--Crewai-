@@ -1,12 +1,136 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>-frontend</title>
+    <title>AgentFlow AI - Enterprise Multi-Agent Business Automation Platform</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-tint": "#adc6ff",
+              "on-secondary-fixed": "#001f26",
+              "outline-variant": "#424754",
+              "tertiary-fixed": "#ffdcc6",
+              "secondary": "#4cd7f6",
+              "inverse-surface": "#e2e2ea",
+              "outline": "#8c909f",
+              "tertiary-fixed-dim": "#ffb786",
+              "on-background": "#e2e2ea",
+              "surface-container-lowest": "#0c0e13",
+              "tertiary": "#ffb786",
+              "primary-container": "#4d8eff",
+              "error-container": "#93000a",
+              "inverse-on-surface": "#2e3036",
+              "on-error-container": "#ffdad6",
+              "surface-container-highest": "#33353b",
+              "surface": "#111319",
+              "on-primary-fixed-variant": "#004395",
+              "surface-dim": "#111319",
+              "on-primary-fixed": "#001a42",
+              "surface-container": "#1d2025",
+              "surface-container-low": "#191c21",
+              "surface-base": "#07090E",
+              "border-subtle": "rgba(255, 255, 255, 0.08)",
+              "error": "#ffb4ab",
+              "on-primary": "#002e6a",
+              "on-primary-container": "#00285d",
+              "on-tertiary-container": "#461f00",
+              "secondary-container": "#03b5d3",
+              "primary": "#adc6ff",
+              "on-tertiary-fixed-variant": "#723600",
+              "on-surface-variant": "#c2c6d6",
+              "amber": "#F59E0B",
+              "surface-container-high": "#282a30",
+              "surface-variant": "#33353b",
+              "on-tertiary-fixed": "#311400",
+              "secondary-fixed": "#acedff",
+              "on-secondary-fixed-variant": "#004e5c",
+              "primary-fixed-dim": "#adc6ff",
+              "surface-overlay": "#141C2E",
+              "on-secondary-container": "#00424e",
+              "secondary-fixed-dim": "#4cd7f6",
+              "surface-bright": "#37393f",
+              "background": "#111319",
+              "on-secondary": "#003640",
+              "inverse-primary": "#005ac2",
+              "on-surface": "#e2e2ea",
+              "on-error": "#690005",
+              "on-tertiary": "#502400",
+              "surface-raised": "#0D121F",
+              "rose": "#F43F5E",
+              "tertiary-container": "#df7412",
+              "emerald": "#10B981",
+              "primary-fixed": "#d8e2ff"
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem"
+            },
+            spacing: {
+              gutter: "1.5rem",
+              "space-xl": "2.5rem",
+              "space-md": "1rem",
+              margin: "2rem",
+              "space-sm": "0.5rem",
+              "space-xs": "0.25rem",
+              "space-lg": "1.5rem"
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              "headline-lg": ["Inter", "sans-serif"],
+              "headline-sm": ["Inter", "sans-serif"],
+              "label-sm": ["Inter", "sans-serif"],
+              "body-lg": ["Inter", "sans-serif"],
+              "headline-md": ["Inter", "sans-serif"],
+              "body-md": ["Inter", "sans-serif"],
+              "mono-data": ["JetBrains Mono", "monospace"],
+              "body-sm": ["Inter", "sans-serif"],
+              "headline-xl": ["Inter", "sans-serif"]
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0d121f;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #282a30;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #424754;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+      }
+    </style>
   </head>
-  <body>
+  <body class="bg-surface font-sans text-on-surface antialiased selection:bg-primary/20 selection:text-primary">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

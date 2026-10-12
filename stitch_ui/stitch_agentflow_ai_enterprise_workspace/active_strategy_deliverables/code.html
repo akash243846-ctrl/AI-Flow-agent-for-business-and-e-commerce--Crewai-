@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {"colors": {"surface-tint": "#adc6ff", "on-secondary-fixed": "#001f26", "outline-variant": "#424754", "tertiary-fixed": "#ffdcc6", "secondary": "#4cd7f6", "inverse-surface": "#e2e2ea", "outline": "#8c909f", "tertiary-fixed-dim": "#ffb786", "on-background": "#e2e2ea", "surface-container-lowest": "#0c0e13", "tertiary": "#ffb786", "primary-container": "#4d8eff", "error-container": "#93000a", "inverse-on-surface": "#2e3036", "on-error-container": "#ffdad6", "surface-container-highest": "#33353b", "surface": "#111319", "on-primary-fixed-variant": "#004395", "surface-dim": "#111319", "on-primary-fixed": "#001a42", "surface-container": "#1d2025", "surface-container-low": "#191c21", "surface-base": "#07090E", "border-subtle": "rgba(255, 255, 255, 0.08)", "error": "#ffb4ab", "on-primary": "#002e6a", "on-primary-container": "#00285d", "on-tertiary-container": "#461f00", "secondary-container": "#03b5d3", "primary": "#adc6ff", "on-tertiary-fixed-variant": "#723600", "on-surface-variant": "#c2c6d6", "amber": "#F59E0B", "surface-container-high": "#282a30", "surface-variant": "#33353b", "on-tertiary-fixed": "#311400", "secondary-fixed": "#acedff", "on-secondary-fixed-variant": "#004e5c", "primary-fixed-dim": "#adc6ff", "surface-overlay": "#141C2E", "on-secondary-container": "#00424e", "secondary-fixed-dim": "#4cd7f6", "surface-bright": "#37393f", "background": "#111319", "on-secondary": "#003640", "inverse-primary": "#005ac2", "on-surface": "#e2e2ea", "on-error": "#690005", "on-tertiary": "#502400", "surface-raised": "#0D121F", "rose": "#F43F5E", "tertiary-container": "#df7412", "emerald": "#10B981", "primary-fixed": "#d8e2ff"}, "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}, "spacing": {"gutter": "1.5rem", "space-xl": "2.5rem", "space-md": "1rem", "margin": "2rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem"}, "fontFamily": {"headline-lg": ["Inter"], "headline-sm": ["Inter"], "label-sm": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Inter"], "body-md": ["Inter"], "mono-data": ["JetBrains Mono"], "body-sm": ["Inter"], "headline-xl": ["Inter"]}, "fontSize": {"headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}], "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "500"}], "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}], "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}], "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "mono-data": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}], "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}], "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "600"}]}}}};</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-surface font-body text-on-surface"><aside class="fixed left-0 top-0 h-full w-80 bg-surface-container-low z-50 flex flex-col pt-space-md pb-space-lg"><div class="px-space-gutter mb-space-md"><button class="w-full flex items-center justify-center gap-space-sm bg-primary hover:bg-primary-container text-on-primary font-headline-sm py-space-sm px-space-gutter rounded-xl transition-all shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined">add</span>Launch New Workflow</button></div><div class="px-space-gutter mb-space-md"><div class="flex items-center bg-surface-raised border border-subtle rounded-xl px-space-sm py-2 text-on-surface-variant"><span class="material-symbols-outlined text-sm mr-space-sm">search</span><span class="text-body-sm flex-1 font-mono-data">Search workflows...</span><span class="text-label-sm bg-surface-container px-1.5 py-0.5 rounded text-outline">⌘K</span></div></div><nav class="flex-1 px-space-md overflow-y-auto space-y-space-md" data-active-classes="bg-surface-container-high text-on-surface font-semibold"><div><div class="px-space-sm mb-space-xs text-label-sm text-outline tracking-wider uppercase">Today</div><div class="space-y-1"><a aria-current="page" class="flex flex-col p-space-sm rounded-xl transition-all bg-surface-container-high text-on-surface font-semibold" data-path="market-research-q1" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Competitor AI Analysis</span><span class="text-emerald text-label-sm">SUCCESS</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span>1.2m</span><span>Gemini Flash</span></div></a><a class="flex flex-col p-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="lead-enrichment" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Q1 Lead Scraping &amp; Enr...</span><span class="text-amber text-label-sm">RUNNING</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span>45s</span><span>Serper + Gemini</span></div></a></div></div><div><div class="px-space-sm mb-space-xs text-label-sm text-outline tracking-wider uppercase">Past 7 Days</div><div class="space-y-1"><a class="flex flex-col p-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="seo-content-gen" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Automated SEO Cluster ...</span><span class="text-emerald text-label-sm">SUCCESS</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span>3.4m</span><span>CrewAI Multi</span></div></a></div></div></nav></aside><div class="pl-80"><header class="fixed top-0 left-80 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-gutter"><div class="flex items-center gap-space-md"><img alt="AgentFlow Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgLfSlBrdkHlYbbnh4kRYKb17myiaT9LwP-mTYQhK5099HFA8rLSHLzYvBq-OTRd4AQqDCXSjfWfjdQnojOUYr5i9H4ipKAqiOyreRnubiOyDJuct4LY2o-mO8fxwNy-SF2CEe5JclvsrqkGT2uctnrghC5bSKXqEhOrQvgESlJ2lV_l-7NHsvEj7LHeTjHi7C0L5o-QBcM2hVRvNmJO2mnlA1xkQU5PFDBU6hHCOXKheeESF19oc"/><span class="text-headline-sm font-bold text-on-surface">AgentFlow AI</span><div class="h-4 w-[1px] bg-outline-variant"></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded-full border border-subtle"><span class="w-2 h-2 rounded-full bg-emerald animate-pulse"></span><span class="text-mono-data text-on-surface-variant">gemini/gemini-3.1-flash-lite</span></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded-full border border-subtle"><span class="material-symbols-outlined text-sm text-primary">search</span><span class="text-mono-data text-on-surface-variant">Serper</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-emerald/10 text-emerald px-space-sm py-1 rounded-full text-mono-data"><span class="w-1.5 h-1.5 rounded-full bg-emerald"></span>System Healthy</div><button class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface bg-surface-container hover:bg-surface-container-high px-space-sm py-2 rounded-xl transition-all border border-subtle"><span class="material-symbols-outlined text-sm">refresh</span></button><button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-2 rounded-xl transition-all border border-subtle font-medium text-body-sm"><span class="material-symbols-outlined text-sm">download</span>Export Report</button><div class="h-6 w-[1px] bg-outline-variant"></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-subtle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArfMqcf0eC_iAcoJO4vSIbrOe3gtH1wFhJZDYIkKBXmLOEQmAz0tLKBibhkOP_lVL9_vycygoSm4Fz9vkaF5lmAOskvLqxztQZFM4eRyfNZiywA1F9iNUO_jvrjuo0JndfQmWLgB8fZBhAG4OUZZinvQaJUU-qU6WcipyuiFSw3sIbmNVJyV-6zC3lEUv4qtVH-xClnrJfIRX1CYpDExVubJoBgu4K2unae1kyN1gmzGBDewQ7EyA"/></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full px-space-gutter py-space-xl space-y-space-xl">
+<!-- Task Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md bg-surface-raised p-space-xl rounded-xl shadow-xl relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col space-y-space-sm relative z-10">
+<div class="flex items-center gap-space-xs text-label-sm text-primary uppercase tracking-widest font-mono-data">
+<span class="material-symbols-outlined text-sm">bolt</span>
+        Active Strategy Deliverable
+      </div>
+<h1 class="text-headline-lg text-on-surface font-headline-lg max-w-3xl">Universal Business &amp; E-Commerce Strategy Engine</h1>
+<div class="flex flex-wrap items-center gap-space-md text-mono-data text-outline pt-space-xs">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span>Duration: 89.76s</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">neurology</span>Model: Gemini 3.1 Flash Lite</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">travel_explore</span>Engine: Google Serper</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm relative z-10">
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-2.5 rounded-xl transition-all font-medium text-body-sm shadow-sm" onclick="navigator.clipboard.writeText(window.location.href); alert('Report Markdown copied to clipboard!');">
+<span class="material-symbols-outlined text-sm">content_copy</span>Copy Markdown
+      </button>
+<button class="flex items-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary px-space-md py-2.5 rounded-xl transition-all font-medium text-body-sm shadow-md" onclick="alert('Downloading executive PDF report...');">
+<span class="material-symbols-outlined text-sm">download</span>Download Report
+      </button>
+</div>
+</div>
+<!-- Navigation Tabs Bar -->
+<div class="flex items-center gap-space-xs overflow-x-auto bg-surface-raised p-1.5 rounded-xl shadow-md w-full">
+<button class="tab-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-lg text-body-sm font-medium transition-all bg-surface-container text-on-surface shadow-sm whitespace-nowrap" id="tab-btn-1" onclick="switchTab(1)">
+<span class="material-symbols-outlined text-sm text-primary">description</span>Executive Strategy Report
+    </button>
+<button class="tab-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-lg text-body-sm font-medium transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container/50 whitespace-nowrap" id="tab-btn-2" onclick="switchTab(2)">
+<span class="material-symbols-outlined text-sm text-secondary">group</span>Agent Work &amp; Roles
+    </button>
+<button class="tab-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-lg text-body-sm font-medium transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container/50 whitespace-nowrap" id="tab-btn-3" onclick="switchTab(3)">
+<span class="material-symbols-outlined text-sm text-amber">timeline</span>Execution Timeline &amp; Trace
+    </button>
+<button class="tab-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-lg text-body-sm font-medium transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container/50 whitespace-nowrap" id="tab-btn-4" onclick="switchTab(4)">
+<span class="material-symbols-outlined text-sm text-emerald">verified</span>Quality Scorecard
+    </button>
+<button class="tab-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-lg text-body-sm font-medium transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container/50 whitespace-nowrap" id="tab-btn-5" onclick="switchTab(5)">
+<span class="material-symbols-outlined text-sm text-rose">how_to_vote</span>Human Governance &amp; Approval
+    </button>
+</div>
+<!-- Tab Contents Container -->
+<div class="w-full">
+<!-- TAB 1: Executive Strategy Report -->
+<div class="tab-content flex flex-col space-y-space-xl" id="tab-content-1">
+<!-- Executive Summary Card -->
+<div class="bg-surface-raised p-space-xl rounded-xl shadow-xl flex flex-col space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-label-sm text-emerald font-mono-data bg-emerald/10 px-3 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-emerald"></span> BOARDROOM READY DOCUMENT
+          </div>
+<span class="text-mono-data text-outline">Generated via Gemini 3.1 Flash Lite</span>
+</div>
+<h2 class="text-headline-md text-on-surface">1. Executive Summary &amp; Market Positioning</h2>
+<p class="text-body-lg text-on-surface-variant leading-relaxed">
+          The Direct-to-Consumer (D2C) children's apparel sector in the target region has experienced a 34% YoY surge, driven by mobile-first purchasing behaviors and premium organic fabric preferences. This universal engine report synthesizes competitor scraping vectors across <span class="text-primary font-mono-data">FirstCry</span>, <span class="text-primary font-mono-data">Myntra Kids</span>, and <span class="text-primary font-mono-data">Hopscotch</span> to formulate an immediate omnichannel capture strategy.
+        </p>
+</div>
+<!-- Competitor Comparison Grid / Table -->
+<div class="bg-surface-raised p-space-xl rounded-xl shadow-xl flex flex-col space-y-space-md">
+<h3 class="text-headline-sm text-on-surface">Top Competitor Matrix Analysis</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-body-sm text-on-surface-variant">
+<thead class="bg-surface-container text-on-surface font-medium text-mono-data uppercase">
+<tr>
+<th class="p-space-md rounded-l-lg">Competitor</th>
+<th class="p-space-md">Market Share</th>
+<th class="p-space-md">Avg AOV</th>
+<th class="p-space-md">Primary Acquisition Channel</th>
+<th class="p-space-md rounded-r-lg">Growth Index</th>
+</tr>
+</thead>
+<tbody class="space-y-2">
+<tr class="bg-surface-container/40 hover:bg-surface-container transition-all">
+<td class="p-space-md font-medium text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-sm">storefront</span> FirstCry
+                </td>
+<td class="p-space-md font-mono-data">42.5%</td>
+<td class="p-space-md font-mono-data">$48.50</td>
+<td class="p-space-md">SEO / Organic Search &amp; Franchise Apps</td>
+<td class="p-space-md text-emerald font-mono-data">+18.2%</td>
+</tr>
+<tr class="bg-surface-container/20 hover:bg-surface-container transition-all">
+<td class="p-space-md font-medium text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-sm">storefront</span> Myntra Kids
+                </td>
+<td class="p-space-md font-mono-data">28.0%</td>
+<td class="p-space-md font-mono-data">$62.00</td>
+<td class="p-space-md">Influencer Collaborations &amp; Push Notifs</td>
+<td class="p-space-md text-emerald font-mono-data">+24.5%</td>
+</tr>
+<tr class="bg-surface-container/40 hover:bg-surface-container transition-all">
+<td class="p-space-md font-medium text-on-surface flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-amber text-sm">storefront</span> Hopscotch
+                </td>
+<td class="p-space-md font-mono-data">14.5%</td>
+<td class="p-space-md font-mono-data">$35.00</td>
+<td class="p-space-md">Flash Sales &amp; Meta Ads Retargeting</td>
+<td class="p-space-md text-amber font-mono-data">+8.1%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Phased 30-Day Marketing Table -->
+<div class="bg-surface-raised p-space-xl rounded-xl shadow-xl flex flex-col space-y-space-md">
+<h3 class="text-headline-sm text-on-surface">4-Week Phased 30-Day Execution Plan</h3>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md">
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col space-y-space-xs">
+<span class="text-label-sm text-primary font-mono-data">WEEK 01</span>
+<span class="text-headline-sm text-on-surface">Foundation &amp; Audit</span>
+<p class="text-body-sm text-on-surface-variant">Setup multi-region tracking, pixel integrations, and initial catalog cleanup.</p>
+</div>
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col space-y-space-xs">
+<span class="text-label-sm text-secondary font-mono-data">WEEK 02</span>
+<span class="text-headline-sm text-on-surface">Performance Blitz</span>
+<p class="text-body-sm text-on-surface-variant">Launch targeted Meta &amp; Google shopping campaigns with hyper-segmentation.</p>
+</div>
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col space-y-space-xs">
+<span class="text-label-sm text-amber font-mono-data">WEEK 03</span>
+<span class="text-headline-sm text-on-surface">Influencer Scaling</span>
+<p class="text-body-sm text-on-surface-variant">Activate micro-influencer seeding pods and user-generated video loops.</p>
+</div>
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col space-y-space-xs">
+<span class="text-label-sm text-emerald font-mono-data">WEEK 04</span>
+<span class="text-headline-sm text-on-surface">Retention Engine</span>
+<p class="text-body-sm text-on-surface-variant">Deploy automated WhatsApp &amp; Email retention flows for cart abandoners.</p>
+</div>
+</div>
+</div>
+<!-- Verified Source URLs -->
+<div class="bg-surface-raised p-space-xl rounded-xl shadow-xl flex flex-col space-y-space-md">
+<h3 class="text-headline-sm text-on-surface">Verified Source References</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
+<a class="flex items-center justify-between p-space-sm bg-surface-container hover:bg-surface-container-high rounded-xl text-body-sm text-on-surface transition-all" href="#" onclick="alert('Opening source reference URL...'); return false;">
+<span class="flex items-center gap-space-xs truncate"><span class="material-symbols-outlined text-sm text-primary">link</span>https://www.retail-insights-q1.org/d2c-apparel-trends</span>
+<span class="material-symbols-outlined text-sm text-outline">open_in_new</span>
+</a>
+<a class="flex items-center justify-between p-space-sm bg-surface-container hover:bg-surface-container-high rounded-xl text-body-sm text-on-surface transition-all" href="#" onclick="alert('Opening source reference URL...'); return false;">
+<span class="flex items-center gap-space-xs truncate"><span class="material-symbols-outlined text-sm text-primary">link</span>https://serper.dev/search?q=ecommerce+children+apparel+2025</span>
+<span class="material-symbols-outlined text-sm text-outline">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- TAB 2: Agent Work & Roles -->
+<div class="tab-content hidden flex flex-col space-y-space-md" id="tab-content-2">
+<div class="bg-surface-raised p-space-lg rounded-xl shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-headline-sm">01</div>
+<div>
+<h4 class="text-headline-sm text-on-surface">Strategic Supervisor Agent</h4>
+<p class="text-body-sm text-on-surface-variant">Orchestrated sub-task decomposition and final synthesis of all downstream nodes.</p>
+</div>
+</div>
+<span class="text-emerald text-mono-data bg-emerald/10 px-3 py-1 rounded-full">COMPLETED (100%)</span>
+</div>
+<div class="bg-surface-raised p-space-lg rounded-xl shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary font-bold text-headline-sm">02</div>
+<div>
+<h4 class="text-headline-sm text-on-surface">Market Researcher (Serper API)</h4>
+<p class="text-body-sm text-on-surface-variant">Extracted 44 distinct search queries and parsed competitive pricing indexes.</p>
+</div>
+</div>
+<span class="text-emerald text-mono-data bg-emerald/10 px-3 py-1 rounded-full">COMPLETED (100%)</span>
+</div>
+<div class="bg-surface-raised p-space-lg rounded-xl shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-amber/10 flex items-center justify-center text-amber font-bold text-headline-sm">03</div>
+<div>
+<h4 class="text-headline-sm text-on-surface">Data Analyst Agent</h4>
+<p class="text-body-sm text-on-surface-variant">Normalized AOV metrics, traffic distribution vectors, and growth margins.</p>
+</div>
+</div>
+<span class="text-emerald text-mono-data bg-emerald/10 px-3 py-1 rounded-full">COMPLETED (100%)</span>
+</div>
+<div class="bg-surface-raised p-space-lg rounded-xl shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary font-bold text-headline-sm">04</div>
+<div>
+<h4 class="text-headline-sm text-on-surface">Report Writer Agent</h4>
+<p class="text-body-sm text-on-surface-variant">Drafted boardroom-ready markdown layout adhering strictly to professional typography.</p>
+</div>
+</div>
+<span class="text-emerald text-mono-data bg-emerald/10 px-3 py-1 rounded-full">COMPLETED (100%)</span>
+</div>
+<div class="bg-surface-raised p-space-lg rounded-xl shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-emerald/10 flex items-center justify-center text-emerald font-bold text-headline-sm">05</div>
+<div>
+<h4 class="text-headline-sm text-on-surface">Quality Auditor Agent</h4>
+<p class="text-body-sm text-on-surface-variant">Ran factual consistency checks and verified markdown structural integrity.</p>
+</div>
+</div>
+<span class="text-emerald text-mono-data bg-emerald/10 px-3 py-1 rounded-full">VERIFIED</span>
+</div>
+</div>
+<!-- TAB 3: Execution Timeline & Trace -->
+<div class="tab-content hidden flex flex-col space-y-space-md" id="tab-content-3">
+<div class="bg-surface-raised p-space-xl rounded-xl shadow-xl flex flex-col space-y-space-md">
+<h3 class="text-headline-sm text-on-surface">Workflow Execution Trace Log</h3>
+<div class="space-y-3 font-mono-data text-body-sm text-on-surface-variant">
+<div class="p-3 bg-surface-container rounded-lg flex items-center justify-between">
+<span class="text-primary">[00.00s] INITIALIZE</span>
+<span>Workflow triggered with prompt token ID #8892</span>
+<span class="text-emerald">OK</span>
+</div>
+<div class="p-3 bg-surface-container rounded-lg flex items-center justify-between">
+<span class="text-secondary">[12.40s] SERPER_FETCH</span>
+<span>Queried 14 target URLs for market share data</span>
+<span class="text-emerald">OK</span>
+</div>
+<div class="p-3 bg-surface-container rounded-lg flex items-center justify-between">
+<span class="text-amber">[45.10s] GEMINI_SYNTHESIS</span>
+<span>Generated executive structured tables &amp; marketing phases</span>
+<span class="text-emerald">OK</span>
+</div>
+<div class="p-3 bg-surface-container rounded-lg flex items-center justify-between">
+<span class="text-emerald">[89.76s] FINAL_AUDIT</span>
+<span>Quality score verified at 98.4% confidence threshold</span>
+<span class="text-emerald">APPROVED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB 4: Quality Scorecard -->
+<div class="tab-content hidden flex flex-col md:flex-row gap-space-xl" id="tab-content-4">
+<div class="flex-1 bg-surface-raised p-space-xl rounded-xl shadow-xl flex flex-col items-center justify-center text-center space-y-space-md">
+<div class="relative w-36 h-36 flex items-center justify-center rounded-full bg-surface-container shadow-inner">
+<span class="text-headline-xl text-primary font-bold">98.4</span>
+<span class="absolute text-label-sm text-outline bottom-6 uppercase">Confidence</span>
+</div>
+<h3 class="text-headline-md text-on-surface">Overall Scorecard Rating</h3>
+<p class="text-body-sm text-on-surface-variant max-w-sm">Evaluated across hallucination metrics, citation validity, and structural completeness.</p>
+</div>
+<div class="flex-1 bg-surface-raised p-space-xl rounded-xl shadow-xl flex flex-col justify-between space-y-space-md">
+<div class="flex items-center justify-between bg-emerald/10 p-space-md rounded-xl">
+<span class="text-headline-sm text-emerald font-bold">AUDIT VERDICT: APPROVED</span>
+<span class="material-symbols-outlined text-emerald text-3xl">verified</span>
+</div>
+<div class="space-y-3 text-body-sm text-on-surface-variant">
+<div class="flex justify-between"><span>Citation Accuracy:</span><span class="text-on-surface font-mono-data">100%</span></div>
+<div class="flex justify-between"><span>Markdown Compliance:</span><span class="text-on-surface font-mono-data">99.1%</span></div>
+<div class="flex justify-between"><span>Tone &amp; Formatting:</span><span class="text-on-surface font-mono-data">Boardroom Grade</span></div>
+</div>
+<button class="w-full bg-surface-container hover:bg-surface-container-high text-on-surface py-2.5 rounded-xl transition-all font-medium text-body-sm" onclick="alert('Scorecard re-audit triggered.');">Run Manual Re-Audit</button>
+</div>
+</div>
+<!-- TAB 5: Human Governance & Approval -->
+<div class="tab-content hidden flex flex-col space-y-space-xl" id="tab-content-5">
+<div class="bg-surface-raised p-space-xl rounded-xl shadow-xl flex flex-col space-y-space-md">
+<h3 class="text-headline-sm text-on-surface">Governance &amp; Compliance Sign-Off</h3>
+<p class="text-body-md text-on-surface-variant">This strategy deliverable has passed automated guardrails. Human-in-the-loop review is currently active for final production deployment.</p>
+<div class="flex items-center gap-space-md pt-space-md">
+<button class="flex-1 bg-emerald hover:bg-emerald/90 text-on-primary py-3 rounded-xl font-medium text-body-md transition-all shadow-md flex items-center justify-center gap-space-xs" onclick="alert('Deliverable Approved &amp; Published!');">
+<span class="material-symbols-outlined">check_circle</span>Approve &amp; Deploy Strategy
+          </button>
+<button class="flex-1 bg-surface-container hover:bg-surface-container-high text-on-surface py-3 rounded-xl font-medium text-body-md transition-all flex items-center justify-center gap-space-xs" onclick="alert('Revision requested. Sending back to agents.');">
+<span class="material-symbols-outlined">edit_note</span>Request Revision
+          </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function switchTab(tabIndex) {
+    // Hide all contents
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(el => el.classList.add('hidden'));
+
+    // Reset all buttons
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => {
+      btn.className = "tab-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-lg text-body-sm font-medium transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container/50 whitespace-nowrap";
+    });
+
+    // Show active content
+    document.getElementById('tab-content-' + tabIndex).classList.remove('hidden');
+
+    // Style active button
+    const activeBtn = document.getElementById('tab-btn-' + tabIndex);
+    activeBtn.className = "tab-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-lg text-body-sm font-medium transition-all bg-surface-container text-on-surface shadow-sm whitespace-nowrap";
+  }
+</script></main></div></body></html>

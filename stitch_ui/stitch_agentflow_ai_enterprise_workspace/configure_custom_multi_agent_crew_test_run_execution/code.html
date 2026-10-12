@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {"colors": {"surface-tint": "#adc6ff", "on-secondary-fixed": "#001f26", "outline-variant": "#424754", "tertiary-fixed": "#ffdcc6", "secondary": "#4cd7f6", "inverse-surface": "#e2e2ea", "outline": "#8c909f", "tertiary-fixed-dim": "#ffb786", "on-background": "#e2e2ea", "surface-container-lowest": "#0c0e13", "tertiary": "#ffb786", "primary-container": "#4d8eff", "error-container": "#93000a", "inverse-on-surface": "#2e3036", "on-error-container": "#ffdad6", "surface-container-highest": "#33353b", "surface": "#111319", "on-primary-fixed-variant": "#004395", "surface-dim": "#111319", "on-primary-fixed": "#001a42", "surface-container": "#1d2025", "surface-container-low": "#191c21", "surface-base": "#07090E", "border-subtle": "rgba(255, 255, 255, 0.08)", "error": "#ffb4ab", "on-primary": "#002e6a", "on-primary-container": "#00285d", "on-tertiary-container": "#461f00", "secondary-container": "#03b5d3", "primary": "#adc6ff", "on-tertiary-fixed-variant": "#723600", "on-surface-variant": "#c2c6d6", "amber": "#F59E0B", "surface-container-high": "#282a30", "surface-variant": "#33353b", "on-tertiary-fixed": "#311400", "secondary-fixed": "#acedff", "on-secondary-fixed-variant": "#004e5c", "primary-fixed-dim": "#adc6ff", "surface-overlay": "#141C2E", "on-secondary-container": "#00424e", "secondary-fixed-dim": "#4cd7f6", "surface-bright": "#37393f", "background": "#111319", "on-secondary": "#003640", "inverse-primary": "#005ac2", "on-surface": "#e2e2ea", "on-error": "#690005", "on-tertiary": "#502400", "surface-raised": "#0D121F", "rose": "#F43F5E", "tertiary-container": "#df7412", "emerald": "#10B981", "primary-fixed": "#d8e2ff"}, "borderRadius": {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"}, "spacing": {"gutter": "1.5rem", "space-xl": "2.5rem", "space-md": "1rem", "margin": "2rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem"}, "fontFamily": {"headline-lg": ["Inter"], "headline-sm": ["Inter"], "label-sm": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Inter"], "body-md": ["Inter"], "mono-data": ["JetBrains Mono"], "body-sm": ["Inter"], "headline-xl": ["Inter"]}, "fontSize": {"headline-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}], "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "500"}], "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}], "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}], "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "mono-data": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}], "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}], "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "600"}]}}}};</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-surface font-body text-on-surface"><aside class="fixed left-0 top-0 h-full w-80 bg-surface-container-low z-50 flex flex-col pt-space-md pb-space-lg"><div class="px-space-gutter mb-space-md"><button class="w-full flex items-center justify-center gap-space-sm bg-primary hover:bg-primary-container text-on-primary font-headline-sm py-space-sm px-space-gutter rounded-xl transition-all shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="material-symbols-outlined">add</span>Launch New Workflow</button></div><div class="px-space-gutter mb-space-md"><div class="flex items-center bg-surface-raised border border-subtle rounded-xl px-space-sm py-2 text-on-surface-variant"><span class="material-symbols-outlined text-sm mr-space-sm">search</span><span class="text-body-sm flex-1 font-mono-data">Search workflows...</span><span class="text-label-sm bg-surface-container px-1.5 py-0.5 rounded text-outline">⌘K</span></div></div><nav class="flex-1 px-space-md overflow-y-auto space-y-space-md" data-active-classes="bg-surface-container-high text-on-surface font-semibold"><div><div class="px-space-sm mb-space-xs text-label-sm text-outline tracking-wider uppercase">Workspace</div><div class="space-y-1 mb-space-md"><a class="flex flex-col p-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="configure-crew" href="#"><span class="material-symbols-outlined text-sm text-primary">group</span>Configure Crew</a></div><div class="px-space-sm mb-space-xs text-label-sm text-outline tracking-wider uppercase">Today</div><div class="space-y-1"><a class="flex flex-col p-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="market-research-q1" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Competitor AI Analysis</span><span class="text-emerald text-label-sm">SUCCESS</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span class="">1.2m</span><span class="">Gemini Flash</span></div></a><a class="flex flex-col p-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="lead-enrichment" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Q1 Lead Scraping &amp; Enr...</span><span class="text-amber text-label-sm">RUNNING</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span class="">45s</span><span class="">Serper + Gemini</span></div></a></div></div><div><div class="px-space-sm mb-space-xs text-label-sm text-outline tracking-wider uppercase">Past 7 Days</div><div class="space-y-1"><a class="flex flex-col p-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="seo-content-gen" href="#"><div class="flex items-center justify-between text-body-sm font-medium"><span class="truncate">Automated SEO Cluster ...</span><span class="text-emerald text-label-sm">SUCCESS</span></div><div class="flex items-center justify-between text-mono-data text-outline mt-1"><span class="">3.4m</span><span class="">CrewAI Multi</span></div></a></div></div></nav></aside><div class="pl-80"><header class="fixed top-0 left-80 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-gutter"><div class="flex items-center gap-space-md"><img alt="AgentFlow Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgLfSlBrdkHlYbbnh4kRYKb17myiaT9LwP-mTYQhK5099HFA8rLSHLzYvBq-OTRd4AQqDCXSjfWfjdQnojOUYr5i9H4ipKAqiOyreRnubiOyDJuct4LY2o-mO8fxwNy-SF2CEe5JclvsrqkGT2uctnrghC5bSKXqEhOrQvgESlJ2lV_l-7NHsvEj7LHeTjHi7C0L5o-QBcM2hVRvNmJO2mnlA1xkQU5PFDBU6hHCOXKheeESF19oc"/><span class="text-headline-sm font-bold text-on-surface">AgentFlow AI</span><div class="h-4 w-[1px] bg-outline-variant"></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded-full border border-subtle"><span class="w-2 h-2 rounded-full bg-emerald animate-pulse"></span><span class="text-mono-data text-on-surface-variant">gemini/gemini-3.1-flash-lite</span></div><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded-full border border-subtle"><span class="material-symbols-outlined text-sm text-primary">search</span><span class="text-mono-data text-on-surface-variant">Serper</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-emerald/10 text-emerald px-space-sm py-1 rounded-full text-mono-data"><span class="w-1.5 h-1.5 rounded-full bg-emerald"></span>System Healthy</div><button class="flex items-center gap-space-xs text-on-surface-variant hover:text-on-surface bg-surface-container hover:bg-surface-container-high px-space-sm py-2 rounded-xl transition-all border border-subtle"><span class="material-symbols-outlined text-sm">refresh</span></button><button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-2 rounded-xl transition-all border border-subtle font-medium text-body-sm"><span class="material-symbols-outlined text-sm">download</span>Export Report</button><div class="h-6 w-[1px] bg-outline-variant"></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-subtle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArfMqcf0eC_iAcoJO4vSIbrOe3gtH1wFhJZDYIkKBXmLOEQmAz0tLKBibhkOP_lVL9_vycygoSm4Fz9vkaF5lmAOskvLqxztQZFM4eRyfNZiywA1F9iNUO_jvrjuo0JndfQmWLgB8fZBhAG4OUZZinvQaJUU-qU6WcipyuiFSw3sIbmNVJyV-6zC3lEUv4qtVH-xClnrJfIRX1CYpDExVubJoBgu4K2unae1kyN1gmzGBDewQ7EyA"/></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-24">
+<!-- Top Banner / Header Overview -->
+<div class="px-space-gutter pt-space-xl pb-space-lg flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs text-primary font-mono-data mb-space-xs">
+<span class="material-symbols-outlined text-sm">hub</span>
+<span>CREW ARCHITECTURE // TOPOLOGY V3.4</span>
+</div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Configure Custom Multi-Agent Crew</h1>
+<p class="text-body-md text-on-surface-variant mt-1 max-w-2xl">
+        Assemble specialized autonomous agents, wire dynamic inter-agent handoff hooks, and execute dry-runs with live telemetry tracing.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-2.5 rounded-xl transition-all font-medium text-body-md" id="btn-save-draft">
+<span class="material-symbols-outlined text-sm">save</span>Save Draft
+      </button>
+<button class="flex items-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary px-space-lg py-2.5 rounded-xl transition-all font-semibold text-body-md shadow-lg shadow-primary/20" id="btn-launch-console">
+<span class="material-symbols-outlined text-sm">play_arrow</span>Run Test Execution
+      </button>
+</div>
+</div>
+<!-- Main Grid Workspace -->
+<div class="px-space-gutter grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left Column: Agent Nodes Canvas (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Pipeline Topology Card -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl relative overflow-hidden flex flex-col gap-space-md">
+<div class="absolute -right-24 -top-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary">account_tree</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Active Crew Pipeline</h2>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="text-label-sm text-outline uppercase tracking-wider">Sequential Workflow</span>
+<span class="w-2 h-2 rounded-full bg-emerald"></span>
+</div>
+</div>
+<!-- Agent Nodes Flow List -->
+<div class="grid grid-cols-1 gap-space-sm mt-space-sm">
+<!-- Node 1 -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-center justify-between transition-all hover:bg-surface-container-high group">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-headline-sm">
+<span class="material-symbols-outlined">supervisor_account</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<span class="text-body-md font-medium text-on-surface">Strategic Supervisor</span>
+<span class="text-label-sm bg-primary/10 text-primary px-2 py-0.5 rounded-full font-mono-data">Lead Agent</span>
+</div>
+<p class="text-body-sm text-outline mt-0.5">Gemini 1.5 Pro • Orchestrates task breakdown &amp; delegation</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-mono-data text-outline">Temp: 0.2</span>
+<button class="text-on-surface-variant hover:text-on-surface p-2 rounded-lg bg-surface-raised"><span class="material-symbols-outlined text-sm">settings</span></button>
+</div>
+</div>
+<!-- Connector Line -->
+<div class="flex justify-center my-[-4px] z-10">
+<div class="w-0.5 h-4 bg-outline-variant/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-outline">arrow_downward</span>
+</div>
+</div>
+<!-- Node 2 -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-center justify-between transition-all hover:bg-surface-container-high group">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center font-headline-sm">
+<span class="material-symbols-outlined">query_stats</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<span class="text-body-md font-medium text-on-surface">Market Researcher</span>
+<span class="text-label-sm bg-secondary/10 text-secondary px-2 py-0.5 rounded-full font-mono-data">Serper + LLM</span>
+</div>
+<p class="text-body-sm text-outline mt-0.5">Deep web extraction, competitor profiling, trends</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-mono-data text-outline">Temp: 0.5</span>
+<button class="text-on-surface-variant hover:text-on-surface p-2 rounded-lg bg-surface-raised"><span class="material-symbols-outlined text-sm">settings</span></button>
+</div>
+</div>
+<!-- Connector Line -->
+<div class="flex justify-center my-[-4px] z-10">
+<div class="w-0.5 h-4 bg-outline-variant/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-outline">arrow_downward</span>
+</div>
+</div>
+<!-- Node 3 -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-center justify-between transition-all hover:bg-surface-container-high group">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-amber/10 text-amber flex items-center justify-center font-headline-sm">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<span class="text-body-md font-medium text-on-surface">Data Analyst</span>
+<span class="text-label-sm bg-amber/10 text-amber px-2 py-0.5 rounded-full font-mono-data">Python Code Interpreter</span>
+</div>
+<p class="text-body-sm text-outline mt-0.5">Statistical modeling, chart generation, metrics crunching</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-mono-data text-outline">Temp: 0.1</span>
+<button class="text-on-surface-variant hover:text-on-surface p-2 rounded-lg bg-surface-raised"><span class="material-symbols-outlined text-sm">settings</span></button>
+</div>
+</div>
+<!-- Connector Line -->
+<div class="flex justify-center my-[-4px] z-10">
+<div class="w-0.5 h-4 bg-outline-variant/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-outline">arrow_downward</span>
+</div>
+</div>
+<!-- Node 4 -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-center justify-between transition-all hover:bg-surface-container-high group">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-rose/10 text-rose flex items-center justify-center font-headline-sm">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<span class="text-body-md font-medium text-on-surface">Report Writer</span>
+<span class="text-label-sm bg-rose/10 text-rose px-2 py-0.5 rounded-full font-mono-data">Markdown Gen</span>
+</div>
+<p class="text-body-sm text-outline mt-0.5">Synthesizes multi-source telemetry into executive briefs</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-mono-data text-outline">Temp: 0.7</span>
+<button class="text-on-surface-variant hover:text-on-surface p-2 rounded-lg bg-surface-raised"><span class="material-symbols-outlined text-sm">settings</span></button>
+</div>
+</div>
+<!-- Connector Line -->
+<div class="flex justify-center my-[-4px] z-10">
+<div class="w-0.5 h-4 bg-outline-variant/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-outline">arrow_downward</span>
+</div>
+</div>
+<!-- Node 5 -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-center justify-between transition-all hover:bg-surface-container-high group">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-emerald/10 text-emerald flex items-center justify-center font-headline-sm">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<span class="text-body-md font-medium text-on-surface">Quality Auditor</span>
+<span class="text-label-sm bg-emerald/10 text-emerald px-2 py-0.5 rounded-full font-mono-data">Guardrails</span>
+</div>
+<p class="text-body-sm text-outline mt-0.5">Hallucination check, policy compliance &amp; formatting validator</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-mono-data text-outline">Temp: 0.0</span>
+<button class="text-on-surface-variant hover:text-on-surface p-2 rounded-lg bg-surface-raised"><span class="material-symbols-outlined text-sm">settings</span></button>
+</div>
+</div>
+</div>
+<div class="mt-space-sm pt-space-md flex items-center justify-between">
+<button class="flex items-center gap-space-xs text-primary hover:text-primary-container text-body-sm font-medium">
+<span class="material-symbols-outlined text-sm">add_circle</span>Add Custom Agent Node
+          </button>
+<span class="text-mono-data text-outline">5 active agents linked in pipeline</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Global Parameters & Memory Settings (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Global Hyperparameters -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl flex flex-col gap-space-md">
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Execution Hyperparameters</h2>
+<div class="space-y-space-md">
+<div>
+<label class="block text-body-sm text-on-surface-variant mb-space-xs font-medium">Primary LLM Provider</label>
+<div class="bg-surface-raised p-3 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary">neurology</span>
+<span class="text-body-md text-on-surface font-mono-data">gemini-1.5-pro-latest</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block text-body-sm text-on-surface-variant mb-space-xs font-medium">Max Execution Steps</label>
+<div class="flex items-center gap-space-sm">
+<input class="w-full accent-primary bg-surface-raised h-2 rounded-lg" max="20" min="1" type="range" value="5"/>
+<span class="text-mono-data text-on-surface font-bold">15</span>
+</div>
+</div>
+<div>
+<label class="block text-body-sm text-on-surface-variant mb-space-xs font-medium">Memory Vector Store</label>
+<div class="bg-surface-raised p-3 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-amber">database</span>
+<span class="text-body-md text-on-surface">Pinecone Vector Index</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-emerald"></span>
+</div>
+</div>
+<div>
+<label class="block text-body-sm text-on-surface-variant mb-space-xs font-medium">Guardrail Strictness</label>
+<div class="grid grid-cols-3 gap-space-xs">
+<button class="py-2 rounded-lg bg-surface-container text-on-surface text-body-sm font-medium">Low</button>
+<button class="py-2 rounded-lg bg-primary text-on-primary text-body-sm font-semibold shadow-md">Balanced</button>
+<button class="py-2 rounded-lg bg-surface-container text-on-surface text-body-sm font-medium">Paranoid</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Telemetry Preview Widget -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Last Test Run Metrics</h2>
+<span class="text-emerald text-mono-data bg-emerald/10 px-2 py-0.5 rounded">SUCCESS</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-raised p-space-sm rounded-xl">
+<span class="text-label-sm text-outline uppercase">Total Latency</span>
+<div class="text-headline-md font-mono-data text-on-surface mt-1">4.21s</div>
+</div>
+<div class="bg-surface-raised p-space-sm rounded-xl">
+<span class="text-label-sm text-outline uppercase">Token Count</span>
+<div class="text-headline-md font-mono-data text-on-surface mt-1">12,450</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TEST RUN EXECUTION CONSOLE MODAL OVERLAY (Active & Glassmorphic) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-space-gutter bg-surface-base/80 backdrop-blur-xl" id="execution-console-modal">
+<!-- Modal Window Container -->
+<div class="w-full max-w-5xl h-[870px] bg-surface-raised rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-subtle relative">
+<!-- Glowing ambient top aura -->
+<div class="absolute top-0 left-1/4 right-1/4 h-1 bg-gradient-to-r from-primary via-secondary to-emerald shadow-[0_0_20px_rgba(173,198,255,0.8)]"></div>
+<!-- Modal Header -->
+<div class="px-space-lg py-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-3 h-3 rounded-full bg-emerald animate-ping"></div>
+<div>
+<div class="flex items-center gap-space-sm">
+<span class="text-headline-sm font-headline-sm text-on-surface">Test Run Execution Console</span>
+<span class="bg-primary/20 text-primary text-label-sm px-2 py-0.5 rounded-full font-mono-data">RUNNING - STEP 3/5</span>
+</div>
+<p class="text-body-sm text-outline font-mono-data">Session ID: #tr_89a2bc90 • Multi-Agent Pipeline Live Stream</p>
+</div>
+</div>
+<!-- Interactive Modal Controls -->
+<div class="flex items-center gap-space-sm">
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-1.5 rounded-xl text-body-sm font-medium transition-all" id="btn-pause-run">
+<span class="material-symbols-outlined text-sm">pause</span>Pause
+          </button>
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-1.5 rounded-xl text-body-sm font-medium transition-all" id="btn-memory-buffers">
+<span class="material-symbols-outlined text-sm">memory</span>Memory Buffers
+          </button>
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-1.5 rounded-xl text-body-sm font-medium transition-all" id="btn-raw-json">
+<span class="material-symbols-outlined text-sm">code</span>Raw JSON
+          </button>
+<div class="h-5 w-[1px] bg-outline-variant mx-1"></div>
+<button class="p-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" id="btn-close-console">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<!-- Modal Body Split View -->
+<div class="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
+<!-- Left Panel: Live Execution Timeline & Handoff Logs (7 cols) -->
+<div class="lg:col-span-7 border-r border-subtle p-space-lg overflow-y-auto flex flex-col gap-space-md">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="text-label-sm text-outline uppercase tracking-wider font-mono-data">Step-by-Step Handoff Trace</span>
+<span class="text-mono-data text-primary">Elapsed: 00:01:24</span>
+</div>
+<!-- Timeline Steps -->
+<div class="space-y-space-md relative before:absolute before:inset-0 before:left-4 before:w-0.5 before:bg-outline-variant/30">
+<!-- Step 1: Supervisor -->
+<div class="relative flex items-start gap-space-md group">
+<div class="w-8 h-8 rounded-full bg-emerald text-on-primary flex items-center justify-center font-mono-data text-sm z-10 shadow-md">✓</div>
+<div class="flex-1 bg-surface-container p-space-md rounded-xl">
+<div class="flex items-center justify-between">
+<span class="text-body-md font-medium text-on-surface">1. Strategic Supervisor</span>
+<span class="text-mono-data text-outline">12:04:01 • 340 tokens</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Decomposed query into 4 sub-tasks. Delegated research parameters to Market Researcher node.</p>
+<div class="mt-2 text-mono-data text-emerald bg-emerald/10 inline-block px-2 py-0.5 rounded">Handoff Success</div>
+</div>
+</div>
+<!-- Step 2: Researcher -->
+<div class="relative flex items-start gap-space-md group">
+<div class="w-8 h-8 rounded-full bg-emerald text-on-primary flex items-center justify-center font-mono-data text-sm z-10 shadow-md">✓</div>
+<div class="flex-1 bg-surface-container p-space-md rounded-xl">
+<div class="flex items-center justify-between">
+<span class="text-body-md font-medium text-on-surface">2. Market Researcher</span>
+<span class="text-mono-data text-outline">12:04:18 • 2,150 tokens</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Queried Serper API with 6 targeted queries. Extracted top 15 competitor pricing matrices.</p>
+<div class="mt-2 text-mono-data text-emerald bg-emerald/10 inline-block px-2 py-0.5 rounded">Handoff Success</div>
+</div>
+</div>
+<!-- Step 3: Data Analyst (Active / Pulsing) -->
+<div class="relative flex items-start gap-space-md group">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-mono-data text-sm z-10 shadow-lg animate-pulse">3</div>
+<div class="flex-1 bg-surface-container border border-primary/40 p-space-md rounded-xl shadow-lg shadow-primary/5">
+<div class="flex items-center justify-between">
+<span class="text-body-md font-medium text-primary">3. Data Analyst (Executing)</span>
+<span class="text-mono-data text-amber">RUNNING • 4,890 tokens</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Executing python code interpreter to build regression model on pricing elasticity...</p>
+<div class="mt-3 bg-surface-base p-3 rounded-lg font-mono-data text-xs text-primary/90 overflow-x-auto">
+<code>import pandas as pd<br/>df = pd.read_json('market_data.json')<br/>print(df.describe())</code>
+</div>
+</div>
+</div>
+<!-- Step 4: Writer (Pending) -->
+<div class="relative flex items-start gap-space-md opacity-50">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-outline flex items-center justify-center font-mono-data text-sm z-10">4</div>
+<div class="flex-1 bg-surface-container p-space-md rounded-xl">
+<div class="flex items-center justify-between">
+<span class="text-body-md font-medium text-on-surface">4. Report Writer</span>
+<span class="text-mono-data text-outline">QUEUED</span>
+</div>
+<p class="text-body-sm text-outline mt-1">Waiting for data analysis outputs to synthesize markdown brief.</p>
+</div>
+</div>
+<!-- Step 5: Auditor (Pending) -->
+<div class="relative flex items-start gap-space-md opacity-50">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-outline flex items-center justify-center font-mono-data text-sm z-10">5</div>
+<div class="flex-1 bg-surface-container p-space-md rounded-xl">
+<div class="flex items-center justify-between">
+<span class="text-body-md font-medium text-on-surface">5. Quality Auditor</span>
+<span class="text-mono-data text-outline">QUEUED</span>
+</div>
+<p class="text-body-sm text-outline mt-1">Final hallucination check &amp; policy guardrail validation.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Real-time Streaming Telemetry & Diagnostics (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-space-lg flex flex-col gap-space-md overflow-y-auto">
+<div class="flex items-center justify-between">
+<span class="text-label-sm text-outline uppercase tracking-wider font-mono-data">Live Telemetry Stream</span>
+<div class="flex items-center gap-space-xs text-emerald text-mono-data text-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald animate-ping"></span>Connected
+            </div>
+</div>
+<!-- Telemetry Terminal Box -->
+<div class="bg-surface-base p-space-md rounded-xl font-mono-data text-xs text-on-surface-variant space-y-2 flex-1 overflow-y-auto border border-subtle">
+<div class="text-outline">[12:04:01] SYS: Initializing Crew topology...</div>
+<div class="text-primary">[12:04:02] SUPERVISOR: Prompt received. Spawning 4 sub-agents.</div>
+<div class="text-outline">[12:04:05] RESEARCHER: Serper API query dispatched. 15 results fetched.</div>
+<div class="text-secondary">[12:04:12] RESEARCHER: Payload validated. Transferring context to Analyst.</div>
+<div class="text-amber">[12:04:18] ANALYST: Spawning sandbox container. Running Pandas analysis script.</div>
+<div class="text-on-surface animate-pulse">[12:04:22] ANALYST: Stdout: Mean price point $45.20, Variance 3.2...</div>
+</div>
+<!-- Quick Resource Utilization Meters -->
+<div class="bg-surface-container p-space-md rounded-xl space-y-space-sm">
+<div class="flex items-center justify-between text-body-sm font-medium">
+<span class="text-on-surface">Context Window Utilization</span>
+<span class="text-mono-data text-primary">34% (34.2k / 100k)</span>
+</div>
+<div class="w-full bg-surface-raised h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[34%]"></div>
+</div>
+<div class="flex items-center justify-between text-body-sm font-medium pt-2">
+<span class="text-on-surface">Token Throughput</span>
+<span class="text-mono-data text-secondary">420 tok/s</span>
+</div>
+<div class="w-full bg-surface-raised h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[65%]"></div>
+</div>
+</div>
+<!-- Action Footer inside Modal -->
+<div class="flex items-center justify-between pt-space-xs">
+<button class="text-rose hover:underline text-body-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">cancel</span>Abort Run
+            </button>
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-2 rounded-xl text-body-sm font-medium transition-all" id="btn-export-logs">
+              Export Trace Logs
+            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Client-side script for simple interactive modal toggling -->
+<script>
+    const modal = document.getElementById('execution-console-modal');
+    const btnLaunch = document.getElementById('btn-launch-console');
+    const btnClose = document.getElementById('btn-close-console');
+
+    btnLaunch.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+    });
+
+    btnClose.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  </script>
+</div></main></div>
+</body></html>

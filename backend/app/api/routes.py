@@ -5,7 +5,7 @@ RESTful routes for health checks, task dispatching, polling, report download, an
 from typing import List, Optional
 from pathlib import Path
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Response
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import PlainTextResponse, FileResponse
 from sqlalchemy.orm import Session
 from backend.app.database.session import get_db
 from backend.app.models.db_models import TaskRecord
@@ -129,3 +129,16 @@ def approve_task_endpoint(
     if not record:
         raise HTTPException(status_code=404, detail="Task not found.")
     return record
+
+
+@router.get("/api/download-project-zip", tags=["System"])
+def download_project_zip():
+    """Downloads the complete sanitized AgentFlow AI codebase as a ZIP archive."""
+    zip_path = settings.BASE_DIR_PATH / "agentflow-ai.zip"
+    if not zip_path.exists():
+        raise HTTPException(status_code=404, detail="ZIP archive not found.")
+    return FileResponse(
+        path=str(zip_path),
+        media_type="application/zip",
+        filename="agentflow-ai.zip"
+    )
