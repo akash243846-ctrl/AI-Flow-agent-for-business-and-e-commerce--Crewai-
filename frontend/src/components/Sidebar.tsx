@@ -48,7 +48,7 @@ export function Sidebar({
   );
 
   const sidebarContent = (
-    <div className="w-80 flex flex-col h-full shrink-0 bg-[#07090E]">
+    <div className="w-80 flex flex-col h-full shrink-0 bg-gradient-to-b from-[#101438]/95 via-[#151040]/95 to-[#0b0e28]/95">
       {/* Top Header & Minimize Button */}
       <div className="p-4 flex items-center justify-between border-b border-white/[0.06] shrink-0">
         <div className="flex items-center gap-2.5">
@@ -241,13 +241,26 @@ export function Sidebar({
         )}
       </nav>
 
-      {/* Sidebar Footer Info */}
-      <div className="p-4 border-t border-white/[0.08] bg-[#0A0D14] flex items-center justify-between text-[11px] font-mono text-slate-400 shrink-0">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50" />
-          <span>SQLite Embedded</span>
+      {/* Sidebar Footer Info with Moving Sticker Pill */}
+      <div className="p-3 border-t border-cyan-500/20 bg-gradient-to-t from-[#080B12] to-[#121638] flex flex-col gap-2 shrink-0">
+        <div className="flex items-center justify-between p-2 rounded-xl bg-gradient-to-r from-cyan-500/10 to-indigo-500/10 border border-cyan-400/50 shadow-[0_0_16px_rgba(0,240,255,0.3),inset_0_0_8px_rgba(0,240,255,0.12)]">
+          <div className="flex items-center gap-2">
+            <span className="text-base">🤖</span>
+            <div>
+              <div className="text-[10px] font-mono font-bold text-cyan-300">AgentFlow Engine</div>
+              <div className="text-[9px] font-mono text-slate-400">Gemini Flash • CrewAI</div>
+            </div>
+          </div>
+          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse" />
         </div>
-        <span className="text-slate-600">FastAPI Core</span>
+
+        <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 px-1">
+          <div className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50" />
+            <span>SQLite Embedded</span>
+          </div>
+          <span className="text-cyan-400/70">FastAPI Core</span>
+        </div>
       </div>
     </div>
   );

@@ -112,7 +112,7 @@ export function StudioWorkspace({
             <Terminal className="w-4 h-4" />
             <span>Studio Workspace v3.4</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-white via-cyan-100 to-cyan-300 bg-clip-text text-transparent">
             Universal Business &amp; E-Commerce Strategy Engine
           </h1>
           <p className="text-sm text-slate-400 max-w-2xl leading-relaxed">
@@ -148,18 +148,28 @@ export function StudioWorkspace({
           <span className="text-cyan-400">5 Curated Blueprints</span>
         </div>
         <div className="flex items-center gap-2.5 overflow-x-auto pb-2 no-scrollbar">
-          {PRESET_BLUEPRINTS.map((preset, idx) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => setQueryInput(preset.prompt)}
-              className="flex items-center gap-2 bg-[#0D121F] hover:bg-[#141C2E] text-slate-300 hover:text-white border border-white/[0.08] hover:border-cyan-500/40 px-3.5 py-2.5 rounded-xl text-xs whitespace-nowrap transition-all shadow-sm group"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 group-hover:scale-125 transition-transform" />
-              <strong className="text-slate-200 font-medium">{preset.category}:</strong>
-              <span className="text-slate-400 group-hover:text-slate-300">{preset.title}</span>
-            </button>
-          ))}
+          {PRESET_BLUEPRINTS.map((preset, idx) => {
+            const colors = [
+              { border: 'hover:border-cyan-400/50', glow: 'hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]', dot: 'bg-cyan-400', tag: 'text-cyan-300' },
+              { border: 'hover:border-fuchsia-400/50', glow: 'hover:shadow-[0_0_20px_rgba(217,70,239,0.3)]', dot: 'bg-fuchsia-400', tag: 'text-fuchsia-300' },
+              { border: 'hover:border-emerald-400/50', glow: 'hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]', dot: 'bg-emerald-400', tag: 'text-emerald-300' },
+              { border: 'hover:border-amber-400/50', glow: 'hover:shadow-[0_0_20px_rgba(245,158,11,0.3)]', dot: 'bg-amber-400', tag: 'text-amber-300' },
+              { border: 'hover:border-violet-400/50', glow: 'hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]', dot: 'bg-violet-400', tag: 'text-violet-300' },
+            ][idx % 5];
+
+            return (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setQueryInput(preset.prompt)}
+                className={`flex items-center gap-2 bg-[#0D121F]/90 hover:bg-[#151D30] text-slate-300 hover:text-white border border-white/[0.08] ${colors.border} ${colors.glow} px-3.5 py-2.5 rounded-xl text-xs whitespace-nowrap transition-all duration-200 shadow-sm group active:scale-95`}
+              >
+                <span className={`w-2 h-2 rounded-full ${colors.dot} animate-pulse group-hover:scale-125 transition-transform`} />
+                <span className={`font-bold ${colors.tag}`}>{preset.category}:</span>
+                <span className="text-slate-300 group-hover:text-white">{preset.title}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 

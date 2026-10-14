@@ -8,6 +8,7 @@ import {
   deleteTask,
 } from "./api";
 import { Header } from "./components/Header";
+import { AnimatedStickersBar } from "./components/AnimatedStickers";
 import { Sidebar } from "./components/Sidebar";
 import { MetricsOverview } from "./components/MetricsOverview";
 import { StudioWorkspace } from "./components/StudioWorkspace";
@@ -15,7 +16,6 @@ import { AgentPipeline } from "./components/AgentPipeline";
 import { ReportView } from "./components/ReportView";
 import { TimelineView } from "./components/TimelineView";
 import { ScorecardView } from "./components/ScorecardView";
-import { GrowthStudioView } from "./components/GrowthStudioView";
 import { AgentMatrixModal } from "./components/AgentMatrixModal";
 import { Toast, type ToastMessage } from "./components/Toast";
 import { 
@@ -26,8 +26,7 @@ import {
   Plus, 
   Sparkles,
   Share2,
-  PanelLeftOpen,
-  TrendingUp
+  PanelLeftOpen
 } from "lucide-react";
 import "./App.css";
 
@@ -39,7 +38,7 @@ export function App() {
   const [health, setHealth] = useState<SystemHealth | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isCreatingNew, setIsCreatingNew] = useState(false);
-  const [activeTab, setActiveTab] = useState<"studio" | "report" | "pipeline" | "growth" | "timeline" | "scorecard">("report");
+  const [activeTab, setActiveTab] = useState<"studio" | "report" | "pipeline" | "timeline" | "scorecard">("report");
   const [isMatrixOpen, setIsMatrixOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
@@ -239,7 +238,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07090E] text-slate-100 flex flex-col font-sans selection:bg-cyan-500/20 selection:text-cyan-300">
+    <div className="min-h-screen bg-gradient-to-br from-[#0b0e28] via-[#140f32] to-[#080d24] text-slate-100 flex flex-col font-sans selection:bg-cyan-500/30 selection:text-cyan-200 relative overflow-hidden">
       {/* Toast Notification Container */}
       <Toast toast={toast} onClose={() => setToast(null)} />
 
@@ -291,9 +290,15 @@ export function App() {
 
         {/* Main Workspace Stage (Responsive & min-w-0 to prevent overlap) */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6 min-w-0">
-          {/* Ambient Lighting & Tech Grid Overlay */}
+          {/* Rich Saturated Cosmic Background Glow & Grid Overlay */}
           <div className="fixed inset-0 tech-grid-overlay pointer-events-none -z-10" />
-          <div className="fixed top-1/4 left-1/3 w-[500px] h-[500px] ambient-radial-glow pointer-events-none -z-10" />
+          <div className="fixed -top-48 left-10 w-[750px] h-[750px] rounded-full bg-gradient-to-br from-cyan-500/25 via-blue-600/20 to-transparent pointer-events-none -z-10 blur-3xl" />
+          <div className="fixed top-1/4 -right-20 w-[700px] h-[700px] rounded-full bg-gradient-to-bl from-purple-600/30 via-fuchsia-600/20 to-transparent pointer-events-none -z-10 blur-3xl" />
+          <div className="fixed -bottom-48 left-1/4 w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-indigo-700/25 via-violet-800/20 to-transparent pointer-events-none -z-10 blur-3xl" />
+          <div className="fixed bottom-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-tl from-emerald-500/20 via-teal-600/15 to-transparent pointer-events-none -z-10 blur-3xl" />
+
+          {/* Section 0: Interactive Animated Stickers & AI Capabilities Bar */}
+          <AnimatedStickersBar />
 
           {/* Section 1: Dynamic Metrics Overview Cards */}
           <MetricsOverview tasks={tasks} />
@@ -369,18 +374,7 @@ export function App() {
                     <span>Execution Timeline & Trace</span>
                   </button>
 
-                  <button
-                    type="button"
-                    onClick={() => setActiveTab("growth")}
-                    className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all shrink-0 ${
-                      activeTab === "growth"
-                        ? "bg-secondary-container/20 text-secondary border border-secondary/40 shadow-sm"
-                        : "text-on-surface-variant hover:text-on-surface hover:bg-white/[0.04]"
-                    }`}
-                  >
-                    <TrendingUp className="w-3.5 h-3.5 text-secondary" />
-                    <span>Unit Economics Studio</span>
-                  </button>
+
 
                   <button
                     type="button"
@@ -445,17 +439,7 @@ export function App() {
                     />
                   )}
 
-                  {activeTab === "growth" && (
-                    <GrowthStudioView
-                      onApplyToStudio={(snippet) => {
-                        setQueryInput(snippet);
-                        setIsCreatingNew(true);
-                        setActiveTab("studio");
-                        triggerToast("Unit economics applied to Workflow Studio", "success");
-                      }}
-                      onToast={triggerToast}
-                    />
-                  )}
+
 
                   {activeTab === "scorecard" && (
                     <ScorecardView task={activeTask} />

@@ -2,81 +2,87 @@
   html, body {
     margin: 0;
     padding: 0;
-    background-color: #0f1321;
-    color: #dfe1f6;
+    /* Rich, vibrant cosmic background canvas across entire page */
+    background: radial-gradient(circle at 15% 15%, #181140 0%, #0d1230 35%, #080f24 70%, #050a1a 100%),
+                radial-gradient(circle at 85% 85%, #220c42 0%, #130e32 40%, #080a1e 100%),
+                linear-gradient(135deg, #0d1230 0%, #150f38 50%, #09132b 100%);
+    background-attachment: fixed;
+    color: #e2e8f8;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     overflow-x: hidden;
   }
 }
 
-/* Background Atmosphere */
+/* Luminous Cyber Matrix Grid */
 .tech-grid-overlay {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(168, 85, 247, 0.07) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
-.ambient-radial-glow {
-  background: 
-    radial-gradient(circle 900px at 50% -100px, rgba(0, 240, 255, 0.08), transparent 70%),
-    radial-gradient(circle 700px at 100% 60%, rgba(111, 0, 190, 0.06), transparent 60%),
-    radial-gradient(circle 600px at 0% 40%, rgba(0, 219, 233, 0.05), transparent 50%);
-}
-
-/* Glassmorphism Cards */
+/* Rich Vibrant Glassmorphism Panels with Static Luminous Halos */
 .glass-panel {
-  background: rgba(27, 31, 46, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, rgba(20, 26, 62, 0.88) 0%, rgba(28, 22, 70, 0.84) 50%, rgba(16, 22, 54, 0.88) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.65), 0 0 25px rgba(0, 240, 255, 0.15), inset 0 0 16px rgba(0, 240, 255, 0.05);
 }
 
 .glass-panel-interactive {
-  background: rgba(27, 31, 46, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, rgba(20, 26, 62, 0.88) 0%, rgba(28, 22, 70, 0.84) 50%, rgba(16, 22, 54, 0.88) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.65), 0 0 25px rgba(0, 240, 255, 0.15);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel-interactive:hover {
-  border-color: rgba(0, 240, 255, 0.35);
-  transform: translateY(-2px);
-  box-shadow: 0 16px 36px -10px rgba(0, 240, 255, 0.15);
+  border-color: rgba(0, 240, 255, 0.6);
+  box-shadow: 0 18px 45px -10px rgba(0, 0, 0, 0.7), 0 0 35px rgba(0, 240, 255, 0.35);
 }
 
-/* Custom Scrollbars */
+/* Static Glow Utility Tokens */
+.static-glow-cyan {
+  border: 1px solid rgba(0, 240, 255, 0.55);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35), inset 0 0 12px rgba(0, 240, 255, 0.12);
+}
+
+.static-glow-purple {
+  border: 1px solid rgba(168, 85, 247, 0.55);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.35), inset 0 0 12px rgba(168, 85, 247, 0.12);
+}
+
+.static-glow-emerald {
+  border: 1px solid rgba(16, 185, 129, 0.55);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.35), inset 0 0 12px rgba(16, 185, 129, 0.12);
+}
+
+.static-glow-amber {
+  border: 1px solid rgba(245, 158, 11, 0.55);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.35), inset 0 0 12px rgba(245, 158, 11, 0.12);
+}
+
+/* Custom Scrollbars with Cyan Glow Accent */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #090e1c;
+  background: #0a0e24;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #252939;
+  background: #232c4d;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b494b;
-}
-
-/* Animated Connector Line */
-@keyframes flowDash {
-  to {
-    stroke-dashoffset: -20;
-  }
-}
-
-.animate-flow-dash {
-  stroke-dasharray: 6 4;
-  animation: flowDash 1.2s linear infinite;
+  background: #00F0FF;
+  box-shadow: 0 0 10px #00F0FF;
 }
 
 /* Markdown Executive Report Styles */
@@ -91,7 +97,7 @@
   color: #ffffff;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.25);
   padding-bottom: 0.5rem;
 }
 
@@ -113,7 +119,7 @@
 
 .markdown-body p {
   margin-bottom: 1rem;
-  color: #b9cacb;
+  color: #c4d4dc;
 }
 
 .markdown-body ul {
@@ -131,38 +137,38 @@
   width: 100%;
   border-collapse: collapse;
   margin: 1.25rem 0;
-  background: rgba(15, 19, 33, 0.8);
-  border-radius: 0.5rem;
+  background: rgba(18, 24, 56, 0.9);
+  border-radius: 0.75rem;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.2);
 }
 
 .markdown-body th {
-  background: rgba(37, 41, 57, 0.9);
+  background: rgba(30, 38, 72, 0.95);
   padding: 0.75rem 1rem;
   text-align: left;
   font-weight: 600;
   font-size: 0.8rem;
   text-transform: uppercase;
   color: #00f0ff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.25);
 }
 
 .markdown-body td {
   padding: 0.75rem 1rem;
   font-size: 0.85rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: #dfe1f6;
 }
 
 .markdown-body tr:hover td {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(0, 240, 255, 0.06);
 }
 
 .markdown-body blockquote {
   border-left: 3px solid #00f0ff;
   padding-left: 1rem;
   margin: 1rem 0;
-  color: #849495;
+  color: #9ab0b8;
   font-style: italic;
 }
